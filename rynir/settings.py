@@ -1,3 +1,13 @@
+# Rynir project settings
+
+RYNIR_SCRAPE_PATH = '../data/cache'
+RYNIR_SCRAPE_WHITELIST = (
+  # List of domains we allow scraper jobs for
+  'www.althingi.is',
+  'klaki.net',
+)
+
+
 # Django settings for rynir project.
 
 DEBUG = True
@@ -12,7 +22,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'rynir.sq3',
+        'NAME': '../data/rynir.sq3',
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.

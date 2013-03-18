@@ -7,10 +7,10 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Example:
     # (r'^rynir/', include('rynir.foo.urls')),
-    (r'^althingi/', include('rynir.althingi.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    (r'^/?$',                                        'althingi.views.index'),
+    (r'^fundur/(?P<fundur_id>\d+)/$',                'althingi.views.fundur'),
+    (r'^scrape/(?P<proto>https?)/(?P<domain>[^/]+)/(?P<path>.*)$',
+                                                     'althingi.views.scrape'),
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
