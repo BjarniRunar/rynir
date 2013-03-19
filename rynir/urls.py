@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     (r'^/?$',                                        'althingi.views.index'),
     (r'^fundur/(?P<fundur_id>\d+)/$',                'althingi.views.fundur'),
     (r'^scrape/(?P<proto>https?)/(?P<domain>[^/]+)/(?P<path>.*)$',
-                                                     'althingi.views.scrape'),
+                                                   'althingi.scraper.scrape'),
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
