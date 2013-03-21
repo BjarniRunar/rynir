@@ -1,15 +1,14 @@
 import re
 
+from base import ScraperParser
+
+
 SCRAPER_PARSERS = { }
 
 def Register(cls):
   for rxp in cls.MATCH_URLS:
     SCRAPER_PARSERS[re.compile(rxp)] = cls
 
-class ScraperParser:
-  MATCH_URLS = ( )
-  def parse(self, url, data):
-    return None
 
 class MetaParser(ScraperParser):
   def parse(self, url, data):
@@ -19,3 +18,4 @@ class MetaParser(ScraperParser):
         return cls().parse(url, data)
     print 'No route for %s' % url
     return None
+
