@@ -19,9 +19,7 @@ def scrape(request, proto=None, domain=None, path=None):
     if qs:
       url += '?' + qs
 
-    scrape_id, data = mp.scrape(url)
-    if data is not None:
-      mp.parse(url, data)
+    if mp.scrape_and_parse(url):
       return HttpResponse('OK')
     else:
       return HttpResponse('No data')

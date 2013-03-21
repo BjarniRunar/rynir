@@ -1,4 +1,5 @@
 import re
+import traceback
 
 from base import ScraperParser
 
@@ -28,7 +29,11 @@ class MetaParser(ScraperParser):
         print 'Routing %s to %s' % (url, cls)
         sp = cls()
         sp.scrape_and_parse = self.scrape_and_parse
-        rv = sp.parse(url, data) and rv
+        try:
+          rv = sp.parse(url, data) and (rv is None and True or rv)
+        except:
+          traceback.print_exc()
+          rv = False
     if not rv:
       print 'No route for %s' % url
     return rv

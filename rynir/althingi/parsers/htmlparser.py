@@ -1,7 +1,6 @@
 import re
 
 from base import ScraperParser
-from metaparser import Register
 
 import chardet # Dummy import, BeautifulSoup uses this
 from BeautifulSoup import BeautifulSoup
