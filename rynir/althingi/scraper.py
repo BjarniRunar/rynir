@@ -1,11 +1,13 @@
 import hashlib
 import os
+import re
 import urllib2
 
 from django.http import HttpResponse, Http404
 
 import settings
 from althingi.models import *
+from althingi.parsers import *
 
 
 def AccessDenied(Exception):
@@ -25,6 +27,7 @@ def scrape(request, proto=None, domain=None, path=None):
 
     scrape_id, data = cached_get(url)
     if data is not None:
+      metaparser.MetaParser().parse(url, data)
       return HttpResponse('OK')
     else:
       return HttpResponse('No data')
