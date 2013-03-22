@@ -5,17 +5,21 @@ from base import ScraperParser
 
 
 SCRAPER_PARSERS = { }
+BOOTSTRAP_URLS = [ ]
 
-def Register(cls):
+def RegisterScraperParser(cls):
   for rxp in cls.MATCH_URLS:
     SCRAPER_PARSERS[re.compile(rxp)] = cls
+
+def RegisterBootstrap(url):
+  BOOTSTRAP_URLS.append(url)
 
 
 class MetaParser(ScraperParser):
 
   def _scrape_and_parse(self, url):
     scrape_id, data = self.scrape(url)
-    if scrape_id:
+    if scrape_id and data is not None:
       return self.parse(url, data)
     else:
       return None
@@ -38,3 +42,6 @@ class MetaParser(ScraperParser):
       print 'No route for %s' % url
     return rv
 
+  def bootstrap(self):
+    for url in BOOTSTRAP_URLS:
+      self.scrape_and_parse(url)

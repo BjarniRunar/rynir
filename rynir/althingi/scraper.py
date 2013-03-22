@@ -28,3 +28,7 @@ def scrape(request, proto=None, domain=None, path=None):
     # FIXME: Process the ScraperJob queue?
     return HttpResponse('Should process queue?')
 
+def bootstrap(request):
+  metaparser.MetaParser().bootstrap()
+  return HttpResponse('OK')
+  

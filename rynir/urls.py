@@ -7,10 +7,11 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Example:
     # (r'^rynir/', include('rynir.foo.urls')),
-    (r'^/?$',                                        'althingi.views.index'),
-    (r'^fundur/(?P<fundur_id>\d+)/$',                'althingi.views.fundur'),
+    (r'^/?$',                                     'althingi.views.index'),
+    (r'^fundur/(?P<fundur_id>\d+)/$',             'althingi.views.fundur'),
     (r'^scrape/(?P<proto>https?)/(?P<domain>[^/]+)/(?P<path>.*)$',
-                                                   'althingi.scraper.scrape'),
+                                                  'althingi.scraper.scrape'),
+    (r'^scrape/bootstrap$',                       'althingi.scraper.bootstrap'),
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),

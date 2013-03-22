@@ -10,7 +10,7 @@ class ScraperParserHTML(ScraperParser):
 
   def parse(self, url, data):
     soup = BeautifulSoup(data)
-    if self.scrape_and_parse:
+    if self.scrape_and_parse and self.SCRAPE_URLS:
       scrape = {}
       for url in self.extract_urls(url, soup):
         for rxp in self.SCRAPE_URLS:

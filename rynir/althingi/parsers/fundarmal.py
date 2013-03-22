@@ -1,5 +1,5 @@
 from htmlparser import ScraperParserHTML
-from metaparser import Register
+from metaparser import RegisterScraperParser
 
 class ScraperParserFundarmal(ScraperParserHTML):
   MATCH_URLS = ('http://www.althingi.is/altext/\d+/\d+/l\d+\.sgml$', )
@@ -8,4 +8,4 @@ class ScraperParserFundarmal(ScraperParserHTML):
   def parse(self, url, data):
     return True
 
-Register(ScraperParserFundarmal)
+RegisterScraperParser(ScraperParserFundarmal)
