@@ -20,7 +20,9 @@ class Flokksseta(models.Model):
   endir = models.DateTimeField('Gekk ur flokknum')
 
 class Fundur(models.Model):
+  nr = models.CharField(max_length=5)
   dags = models.DateTimeField('Dagsetning thingfundar')
+  titill = models.CharField(max_length=200)
 
 class Umraeda(models.Model):
   titill = models.CharField(max_length=200)
