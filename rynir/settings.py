@@ -1,12 +1,13 @@
 # Rynir project settings
 
-RYNIR_SCRAPE_PATH = '../data/cache'
-RYNIR_SCRAPE_WHITELIST = (
-  # List of domains we allow scraper jobs for
-  'www.althingi.is',
-  'klaki.net',
-)
-
+try:
+    from local_settings import DEFAULT_DB, SECRET_KEY
+except ImportError:
+    import sys
+    print >> sys.stderr, ('ERROR: You have to make a local copy of the '
+                          'local_settings.py file (see '
+                          'local_settings.py-example).')
+    exit(1)
 
 # Django settings for rynir project.
 
@@ -20,14 +21,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '../data/rynir.sq3',
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
+    'default': DEFAULT_DB
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -70,9 +64,6 @@ MEDIA_URL = ''
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '/media/'
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'ms7v323c%r)_rroe7mlah+=c9iv7*_e5%kp-@9bzs+)-!l+_z2'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
