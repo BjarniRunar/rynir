@@ -2,7 +2,7 @@ from django.db import models
 
 class Flokkur(models.Model):
   nafn = models.CharField(max_length=100)
-  stafur = models.CharField(max_length=1)
+  stafir = models.CharField(max_length=1)
   lysing = models.CharField(max_length=10000)
   url_vefs = models.CharField(max_length=200)
   url_mynd = models.CharField(max_length=200)

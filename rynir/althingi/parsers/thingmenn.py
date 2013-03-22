@@ -34,21 +34,18 @@ class ScraperParserThingmenn(ScraperParserHTML):
                 stafir = SKAMMSTOFUN_RE.search(unicode(nobr)).group(1)
 
                 existing = Thingmadur.objects.filter(stafir=stafir)
-                if len(existing) < 1:
-                  thm = Thingmadur()
-                else:
+                if existing:
                   thm = existing[0]
+                else:
+                  thm = Thingmadur()
                 
                 thm.nafn = nafn
                 thm.stafir = stafir
                 thm.url_vefs = urlbase + cv_url[1:]
                 thm.url_mynd = MYND_URL % {'nr': nr}
                 thm.save()
-                print '%s (%s) = %s (%s)' % (nafn, stafir, cv_url,
-                                             existing and 'updated' or 'new')
               except:
                 traceback.print_exc()
-                pass
 
     return True
 
