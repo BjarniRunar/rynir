@@ -1,20 +1,13 @@
 # Rynir project settings
 
 try:
-    from secrets import DEFAULT_DB, SECRET_KEY
+    from local_settings import DEFAULT_DB, SECRET_KEY
 except ImportError:
     import sys
     print >> sys.stderr, ('ERROR: You have to make a local copy of the '
-                          'secrets.py file (see secrets.py-example).')
+                          'local_settings.py file (see '
+                          'local_settings.py-example).')
     exit(1)
-
-RYNIR_SCRAPE_PATH = '../data/cache'
-RYNIR_SCRAPE_WHITELIST = (
-  # List of domains we allow scraper jobs for
-  'www.althingi.is',
-  'klaki.net',
-)
-
 
 # Django settings for rynir project.
 
