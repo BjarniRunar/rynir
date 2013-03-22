@@ -1,7 +1,7 @@
 # Rynir project settings
 
 try:
-    from local_settings import DEFAULT_DB, SECRET_KEY
+    from local_settings import *
 except ImportError:
     import sys
     print >> sys.stderr, ('ERROR: You have to make a local copy of the '
