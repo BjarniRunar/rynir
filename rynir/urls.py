@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     # (r'^rynir/', include('rynir.foo.urls')),
     (r'^/?$',                                     'althingi.views.index'),
     (r'^fundur/(?P<fundur_id>\d+)/$',             'althingi.views.fundur'),
-    (r'^scrape/(?P<proto>https?)/(?P<domain>[^/]+)/(?P<path>.*)$',
+    (r'^scrape/(?P<proto>https?)(?::/)?/(?P<domain>[^/]+)/(?P<path>.*)$',
                                                   'althingi.scraper.scrape'),
     (r'^scrape/bootstrap$',                       'althingi.scraper.bootstrap'),
 
