@@ -43,7 +43,7 @@ class ScraperParser:
     except (OSError, IOError):
       return (cache_id, None)
 
-  def parse(self, url, data):
+  def parse(self, url, data, fromEncoding=None):
     return None
 
 

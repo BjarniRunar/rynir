@@ -8,8 +8,8 @@ from BeautifulSoup import BeautifulSoup
 class ScraperParserHTML(ScraperParser):
   SCRAPE_URLS = ( )
 
-  def parse(self, url, data, soup=None):
-    soup = soup or BeautifulSoup(data)
+  def parse(self, url, data, soup=None, fromEncoding=None):
+    soup = soup or BeautifulSoup(data, fromEncoding=fromEncoding)
     if self.scrape_and_parse and self.SCRAPE_URLS:
       scrape = {}
       for url in self.extract_urls(url, soup):

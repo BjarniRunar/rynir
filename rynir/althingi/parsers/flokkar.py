@@ -31,8 +31,9 @@ class ScraperParserFlokkar(ScraperParserHTML):
     print '%s (%s) is at %s (%s)' % (nafn, stafir, url,
                                      existing and 'updated' or 'new')
 
-  def parse(self, url, data):
-    soup = ScraperParserHTML.parse(self, url, data.replace('"alt', '" alt'))
+  def parse(self, url, data, fromEncoding=None):
+    soup = ScraperParserHTML.parse(self, url, data.replace('"alt', '" alt'),
+                                   fromEncoding=(fromEncoding or 'windows-1252'))
     urlbase, urldir = self.urls(url)
 
     for li in soup.fetch('li'):

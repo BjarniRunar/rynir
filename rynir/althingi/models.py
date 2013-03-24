@@ -2,14 +2,14 @@ from django.db import models
 
 class Flokkur(models.Model):
   nafn = models.CharField(max_length=100)
-  stafir = models.CharField(max_length=1)
+  stafir = models.CharField(max_length=10)
   lysing = models.CharField(max_length=10000)
   url_vefs = models.CharField(max_length=200)
   url_mynd = models.CharField(max_length=200)
 
 class Thingmadur(models.Model):
   nafn = models.CharField(max_length=100)
-  stafir = models.CharField(max_length=5)
+  stafir = models.CharField(max_length=10)
   url_vefs = models.CharField(max_length=200)
   url_mynd = models.CharField(max_length=200)
 
@@ -20,11 +20,14 @@ class Flokksseta(models.Model):
   endir = models.DateTimeField('Gekk ur flokknum')
 
 class Fundur(models.Model):
-  nr = models.CharField(max_length=5)
+  fnr = models.CharField(max_length=6)
+  lth = models.CharField(max_length=6)
   dags = models.DateTimeField('Dagsetning thingfundar')
   titill = models.CharField(max_length=200)
 
 class Umraeda(models.Model):
+  uid = models.CharField(max_length=30)
+  fundur = models.ForeignKey(Fundur)
   titill = models.CharField(max_length=200)
   timi = models.DateTimeField('Upphaf umraedu')
   efni = models.CharField(max_length=10000)

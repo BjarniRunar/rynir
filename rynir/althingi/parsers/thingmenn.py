@@ -6,19 +6,24 @@ from htmlparser import ScraperParserHTML
 from metaparser import RegisterScraperParser, RegisterBootstrap
 
 
-THINGM_URL = 'http://www.althingi.is/dba-bin/thmn.pl?lthing=.&tegund=%DE&nuvam=1'
-THINGM_RXP = THINGM_URL.replace('.', '\\.').replace('?', '\\?')+'$'
+def reify(url):
+  return url.replace('.', '\\.').replace('?', '\\?').replace('[', '\\[') + '$'
+
+THINGM_URL = ('http://www.althingi.is/dba-bin/thmn.pl?lthing=.&tegund=%DE&nuvam=1',
+              'http://www.althingi.is/dba-bin/thmn.pl?lthing=.&tegund=[V]&radsv=U')
+THINGM_RXP = (reify(THINGM_URL[0]), reify(THINGM_URL[1]))
 MYND_URL = 'http://www.althingi.is/myndir/thingmenn-cache/%(nr)s/%(nr)s-220.jpg'
 
 SKAMMSTOFUN_RE = re.compile('\\(([^)]+)\\)')
 
 
 class ScraperParserThingmenn(ScraperParserHTML):
-  MATCH_URLS = (THINGM_RXP, )
+  MATCH_URLS = (THINGM_RXP[0], THINGM_RXP[1], )
   SCRAPE_URLS = ( )
 
-  def parse(self, url, data):
-    soup = ScraperParserHTML.parse(self, url, data)
+  def parse(self, url, data, fromEncoding=None):
+    soup = ScraperParserHTML.parse(self, url, data,
+                                   fromEncoding=(fromEncoding or 'windows-1252'))
     urlbase, urldir = self.urls(url)
 
     # <tr><td ...><nobr><a href="/altext/cv.php4?...">Ossur ...</a> (OS)
@@ -44,10 +49,12 @@ class ScraperParserThingmenn(ScraperParserHTML):
                 thm.url_vefs = urlbase + cv_url[1:]
                 thm.url_mynd = MYND_URL % {'nr': nr}
                 thm.save()
+                print '%s is %s' % (stafir, nafn)
               except:
                 traceback.print_exc()
 
     return True
 
 RegisterScraperParser(ScraperParserThingmenn)
-RegisterBootstrap(THINGM_URL)
+for url in THINGM_URL:
+  RegisterBootstrap(url)

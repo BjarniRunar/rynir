@@ -26,7 +26,7 @@ class MetaParser(ScraperParser):
 
   scrape_and_parse = _scrape_and_parse
 
-  def parse(self, url, data):
+  def parse(self, url, data, fromEncoding=None):
     rv = None
     for rxp, cls in SCRAPER_PARSERS.iteritems():
       if rxp.match(url):
@@ -34,7 +34,8 @@ class MetaParser(ScraperParser):
         sp = cls()
         sp.scrape_and_parse = self.scrape_and_parse
         try:
-          rv = sp.parse(url, data) and (rv is None and True or rv)
+          rv = sp.parse(url, data, fromEncoding=fromEncoding
+                        ) and (rv is None and True or rv)
         except:
           traceback.print_exc()
           rv = False
