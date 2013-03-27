@@ -1,11 +1,13 @@
+ROOT_DIR = '/path/to/root'
 
-# This is only an example file. You should copy it to 'secrets.py' (ignored by git) and edit the values accordingly.
+# This is only an example file. You should copy it to 'local_settings.py'
+# (ignored by git) and edit the values accordingly.
 # If in development, a pure copy should suffice
 
 # Insert your instance-specific values here
 DEFAULT_DB = {
     'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': '../data/rynir.sq3',
+    'NAME': ROOT_DIR + '/data/rynir.sq3',
     'USER': '',                      # Not used with sqlite3.
     'PASSWORD': '',                  # Not used with sqlite3.
     'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -19,7 +21,7 @@ SECRET_KEY = 'ms7v323c%r)_rroe7mlah+=c9iv7*_e5%kp-@9bzs+)-!l+_z2'
 
 # Rynir specific settings
 
-RYNIR_SCRAPE_PATH = '../data/cache'
+RYNIR_SCRAPE_PATH = ROOT_DIR + '/data/cache'
 
 # List of domains we allow scraper jobs for
 RYNIR_SCRAPE_WHITELIST = (
