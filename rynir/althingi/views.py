@@ -20,8 +20,30 @@ def index(request):
   })
   return HttpResponse(t.render(c))
 
-def fundur(request, fundur_id=None):
-  return HttpResponse('Fundur: %s' % fundur_id)
+def thingmenn(request, thingmadur_id=None):
+  thingmenn = []
+  for thm in Thingmadur.objects.order_by('nafn'):
+    thingmenn.append({
+      'nafn':   thm.nafn,
+      'stafir': thm.stafir,
+      'stafur': thm.nafn[0].lower(),
+      'url':    thm.url_vefs,
+      'mynd':   thm.url_mynd
+    })
+
+  t = loader.get_template('althingi/thingmenn.html')
+  c = Context({
+    'base': settings.TEMPLATE_BASE,
+    'thingmenn': thingmenn
+  })
+  return HttpResponse(t.render(c))
+
+def frumvorp(request, frumvarp_id=None):
+  t = loader.get_template('althingi/frumvorp.html')
+  c = Context({
+    'base': settings.TEMPLATE_BASE
+  })
+  return HttpResponse(t.render(c))
 
 def static(request, filename):
   if '..' in filename:

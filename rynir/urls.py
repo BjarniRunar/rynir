@@ -5,15 +5,17 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^rynir/', include('rynir.foo.urls')),
+    # Content
     (r'^/?$',                                     'althingi.views.index'),
     (r'^static/(.*)$',                            'althingi.views.static'),
-    (r'^fundur/(?P<fundur_id>\d+)/$',             'althingi.views.fundur'),
+    (r'^thingmenn/(?P<thingmadur_id>\d+)?/?$',    'althingi.views.thingmenn'),
+    (r'^frumvorp/(?P<frumvarp_id>\d+)?/?$',       'althingi.views.frumvorp'),
+
+    # Scraper
     (r'^scrape/(?P<proto>https?)(?::/)?/(?P<domain>[^/]+)/(?P<path>.*)$',
                                                   'althingi.scraper.scrape'),
     (r'^scrape/bootstrap$',                       'althingi.scraper.bootstrap'),
 
-    # Uncomment the next line to enable the admin:
+    # The admin
     (r'^admin/', include(admin.site.urls)),
 )

@@ -1,0 +1,20 @@
+{% extends base %}
+
+{% block content %}
+
+<div id='thingmenn' style='width: 670px; margin: 10px auto;'>
+{% for thingmadur in thingmenn %}
+  <div id='thm_{{ thingmadur.stafir }}'
+       class='stafur_{{ thingmadur.stafur }}'
+       style='display: inline-block; width: 120px; padding: 0; margin: 5px;'>
+   <a href='/thingmenn/{{ thingmadur.stafir }}/'>
+    <img style='width: 120px' src='{{ thingmadur.mynd }}'><br>
+    <span style='font-size: 0.8em;'>
+      {{ thingmadur.nafn }}
+    </span>
+   </a>
+  </div>
+{% endfor %}
+</div>
+
+{% endblock %}
