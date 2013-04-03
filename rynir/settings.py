@@ -20,6 +20,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+RYNIR_DIR = ROOT_DIR + '/rynir'
+
 DATABASES = {
     'default': DEFAULT_DB
 }
@@ -87,8 +89,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    ROOT_DIR + '/rynir',
-    ROOT_DIR + '/rynir/includes'
+    RYNIR_DIR,
+    RYNIR_DIR + '/includes'
 )
 
 INSTALLED_APPS = (

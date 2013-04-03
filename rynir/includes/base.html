@@ -1,0 +1,44 @@
+<DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- encoding: utf-8 -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+  <title>Alþingisrýnir - {% block title %}Gagnsæi í boði Pírata{% endblock %}</title>
+
+  <link rel="stylesheet" href="http://www.piratar.is/wp-content/themes/piratar/style.css">
+  <link rel="shortcut icon" href="/static/skin/i/fav.ico" />
+  <script src="http://www.piratar.is/wp-content/themes/piratar/_/js/modernizr-1.7.min.js"></script>{% block stylesheets %}{% endblock %}
+
+{% block header %}{% endblock %}
+
+</head>
+<body class="home blog">
+  <header id="header">
+    <div id="header-content">
+      <p id="site-heading"><a href="/">Alþingisrýnir</a></p>
+      <nav class="menu-header-menu-container">
+        <ul id="menu-header-menu" class="menu">{% block header_menu %}
+          <li id="menu-item-01" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://www.piratar.is/thingmenn/">Þingmenn</a></li>
+          <li id="menu-item-02" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://www.piratar.is/frumvorp/">Frumvörp</a></li>
+          <li id="menu-item-03" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://www.piratar.is/um-althingisryninn/">Um Alþingisrýninn</a></li>
+          <li id="menu-item-04" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://www.piratar.is/">Píratar</a></li>
+        {% endblock %}</ul>
+      </nav>                     
+    </div>
+  </header>
+
+  <div id="page-wrap" class="clearfix"><!-- not needed? up to you: http://camendesign.com/code/developpeurs_sans_frontieres -->
+    {% block content %}<div id="news">
+      <h2 class="index-heading">Hello world</h2>
+    </div>{% endblock %}
+    <div id="sidebar">{% block sidebar %}{% endblock %}</div> 
+  </div>
+
+  <footer id="footer" class="clearfix source-org vcard copyright"></footer>
+
+</body></html> 
