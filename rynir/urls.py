@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     (r'^/?$',                                     'althingi.views.index'),
     (r'^static/(.*)$',                            'althingi.views.static'),
     (r'^thingmenn/(?P<thingmadur_id>[^/]+)?/?$',  'althingi.views.thingmenn'),
-    (r'^frumvorp/(?P<frumvarp_id>[^/]+)?/?$',     'althingi.views.frumvorp'),
+    (r'^kosningar/(?P<kosning_uid>[^/]+)?/?$',    'althingi.views.kosningar'),
 
     # Scraper
     (r'^scrape/(?P<proto>https?)(?::/)?/(?P<domain>[^/]+)/(?P<path>.*)$',

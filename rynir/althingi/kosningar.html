@@ -1,0 +1,15 @@
+{% extends base %}
+
+{% block content %}
+
+<table style='margin: 10px auto;'>
+{% for kosn in kosningar %}
+ <tr>
+  <td><a href='/kosningar/{{ kosn.uid }}'>{{ kosn.titill }}</a></td>
+  <td><tt style='font-size: 0.5em;'><img src='/sparks/{{ kosn.sparks }}'
+                                         alt='{{ kosn.sparks }}'></tt></td>
+ </tr>
+{% endfor %}
+</table>
+
+{% endblock %}

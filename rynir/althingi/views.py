@@ -22,6 +22,11 @@ def index(request):
 
 def thingmenn(request, thingmadur_id=None):
   thingmenn = []
+  data = {
+    'base': settings.TEMPLATE_BASE,
+    'thingmenn': thingmenn
+  }
+
   for thm in Thingmadur.objects.order_by('nafn'):
     thingmenn.append({
       'nafn':   thm.nafn,
@@ -31,19 +36,29 @@ def thingmenn(request, thingmadur_id=None):
       'mynd':   thm.url_mynd
     })
 
-  t = loader.get_template('althingi/thingmenn.html')
-  c = Context({
-    'base': settings.TEMPLATE_BASE,
-    'thingmenn': thingmenn
-  })
-  return HttpResponse(t.render(c))
+  if thingmadur_id:
+    data['thingmadur'] = {
+    }
 
-def frumvorp(request, frumvarp_id=None):
-  t = loader.get_template('althingi/frumvorp.html')
-  c = Context({
-    'base': settings.TEMPLATE_BASE
-  })
-  return HttpResponse(t.render(c))
+  t = loader.get_template('althingi/thingmenn.html')
+  return HttpResponse(t.render(Context(data)))
+
+def kosningar(request, kosning_uid=None):
+  kosningar = []
+  data = {
+    'base': settings.TEMPLATE_BASE,
+    'kosningar': kosningar
+  }
+  for kosn in Kosning.objects.order_by('timi'):
+    kosningar.append({
+      'uid': 1234,
+      'sparks': ''.join([a.atkvaedi for a
+                         in Atkvaedi.objects.filter(kosning=kosn)]),
+      'titill': kosn.titill
+    })
+
+  t = loader.get_template('althingi/kosningar.html')
+  return HttpResponse(t.render(Context(data)))
 
 def static(request, filename):
   if '..' in filename:
