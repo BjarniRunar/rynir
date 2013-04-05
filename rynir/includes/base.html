@@ -7,13 +7,12 @@
   <meta name="HandheldFriendly" content="true" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-
   <title>Alþingisrýnir - {% block title %}Gagnsæi í boði Pírata{% endblock %}</title>
 
   <link rel="stylesheet" href="http://www.piratar.is/wp-content/themes/piratar/style.css">
   <link rel="shortcut icon" href="/static/skin/i/fav.ico" />
   <script src="http://www.piratar.is/wp-content/themes/piratar/_/js/modernizr-1.7.min.js"></script>{% block stylesheets %}{% endblock %}
-
+  <script language='javascript'>{% block javascript %}{% endblock %}</script>
 {% block header %}{% endblock %}
 
 </head>
@@ -27,8 +26,8 @@
       <p id="site-heading"><a href="/">Alþingisrýnir</a></p>
       <nav class="menu-header-menu-container">
         <ul id="menu-header-menu" class="menu">{% block header_menu %}
-          <li id="menu-item-01" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://www.piratar.is/thingmenn/">Þingmenn</a></li>
-          <li id="menu-item-02" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://www.piratar.is/frumvorp/">Frumvörp</a></li>
+          <li id="menu-item-01" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="/thingmenn/">Þingmenn</a></li>
+          <li id="menu-item-02" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="/frumvorp/">Frumvörp</a></li>
           <li id="menu-item-03" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://www.piratar.is/um-althingisryninn/">Um Alþingisrýninn</a></li>
           <li id="menu-item-04" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://www.piratar.is/">Píratar</a></li>
         {% endblock %}</ul>

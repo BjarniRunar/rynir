@@ -8,8 +8,8 @@ urlpatterns = patterns('',
     # Content
     (r'^/?$',                                     'althingi.views.index'),
     (r'^static/(.*)$',                            'althingi.views.static'),
-    (r'^thingmenn/(?P<thingmadur_id>\d+)?/?$',    'althingi.views.thingmenn'),
-    (r'^frumvorp/(?P<frumvarp_id>\d+)?/?$',       'althingi.views.frumvorp'),
+    (r'^thingmenn/(?P<thingmadur_id>[^/]+)?/?$',  'althingi.views.thingmenn'),
+    (r'^frumvorp/(?P<frumvarp_id>[^/]+)?/?$',     'althingi.views.frumvorp'),
 
     # Scraper
     (r'^scrape/(?P<proto>https?)(?::/)?/(?P<domain>[^/]+)/(?P<path>.*)$',

@@ -1,20 +1,34 @@
 {% extends base %}
+{% block javascript %}
 
+function imgError(source) {
+  source.src = "/static/althingi-logo.png";
+  source.onerror = "";
+  return true;
+}
+
+{% endblock %}
 {% block content %}
 
-<div id='thingmenn' style='width: 670px; margin: 10px auto;'>
-{% for thingmadur in thingmenn %}
-  <div id='thm_{{ thingmadur.stafir }}'
-       class='stafur_{{ thingmadur.stafur }}'
-       style='display: inline-block; width: 120px; padding: 0; margin: 5px;'>
-   <a href='/thingmenn/{{ thingmadur.stafir }}/'>
-    <img style='width: 120px' src='{{ thingmadur.mynd }}'><br>
-    <span style='font-size: 0.8em;'>
-      {{ thingmadur.nafn }}
-    </span>
-   </a>
+{% if thingmadur %}
+  <div id='thingmadur'>
+
   </div>
-{% endfor %}
-</div>
+{% else %}
+  <div id='thingmenn' style='width: 670px; margin: 10px auto;'>
+  {% for thingmadur in thingmenn %}
+    <div id='thm_{{ thingmadur.stafir }}'
+         class='stafur_{{ thingmadur.stafur }}'
+         style='display: inline-block; width: 120px; padding: 0;
+                font-size: 0.8em; margin: 5px;'>
+     <a href='/thingmenn/{{ thingmadur.stafir }}/'>
+      <img style='width: 120px' src='{{ thingmadur.mynd }}'
+           alt='' onError='imgError(this);'>
+      <br>{{ thingmadur.nafn }}
+     </a> (<a href='{{ thingmadur.url }}'>hs</a>)
+    </div>
+  {% endfor %}
+  </div>
+{% endif %}
 
 {% endblock %}
