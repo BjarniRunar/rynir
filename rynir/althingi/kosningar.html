@@ -1,10 +1,14 @@
 {% extends base %}
+{% block css %}
+  .mixed_true {background: #7f7;}
+  .mixed_false a {color: #555;}
+{% endblock %}
 
 {% block content %}
 
 <table style='margin: 10px auto;'>
 {% for kosn in kosningar %}
- <tr>
+ <tr class='mixed_{{ kosn.mixed }}'>
   <td><a href='/kosningar/{{ kosn.uid }}'>{{ kosn.titill }}</a></td>
   <td><tt style='font-size: 0.5em;'><img src='/sparks/{{ kosn.sparks }}'
                                          alt='{{ kosn.sparks }}'></tt></td>

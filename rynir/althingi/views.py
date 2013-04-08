@@ -50,10 +50,15 @@ def kosningar(request, kosning_uid=None):
     'kosningar': kosningar
   }
   for kosn in Kosning.objects.order_by('timi'):
+    sparks = ''.join([a.atkvaedi for a
+                      in Atkvaedi.objects.filter(kosning=kosn)])
+    mixed = str(('abrig' in kosn.titill.lower()) or
+                ('J' in sparks and 'N' in sparks) or
+                ('F' in sparks and 'S' in sparks)).lower()
     kosningar.append({
       'uid': 1234,
-      'sparks': ''.join([a.atkvaedi for a
-                         in Atkvaedi.objects.filter(kosning=kosn)]),
+      'mixed': mixed,
+      'sparks': sparks,
       'titill': kosn.titill
     })
 
