@@ -2,6 +2,7 @@ import os
 
 from django.http import HttpResponse, Http404
 from django.template import Context, loader
+from django.views.decorators.cache import cache_control
 
 import settings
 from althingi.models import *
@@ -13,6 +14,7 @@ def AccessDenied(Exception):
 
 ## Views ##
 
+@cache_control(must_revalidate=False, max_age=3600)
 def index(request):
   t = loader.get_template('althingi/index.html')
   c = Context({
@@ -20,6 +22,7 @@ def index(request):
   })
   return HttpResponse(t.render(c))
 
+@cache_control(must_revalidate=False, max_age=3600)
 def thingmenn(request, thingmadur_id=None):
   thingmenn = []
   data = {
@@ -43,6 +46,7 @@ def thingmenn(request, thingmadur_id=None):
   t = loader.get_template('althingi/thingmenn.html')
   return HttpResponse(t.render(Context(data)))
 
+@cache_control(must_revalidate=False, max_age=3600)
 def kosningar(request, kosning_uid=None):
   kosningar = []
   data = {
@@ -50,21 +54,23 @@ def kosningar(request, kosning_uid=None):
     'kosningar': kosningar
   }
   for kosn in Kosning.objects.order_by('timi'):
-    sparks = ''.join([a.atkvaedi for a
-                      in Atkvaedi.objects.filter(kosning=kosn)])
-    mixed = str(('abrig' in kosn.titill.lower()) or
+    sparks = kosn.sparks()
+    mixed = str(('afbrig' in kosn.titill.lower()) or
                 ('J' in sparks and 'N' in sparks) or
                 ('F' in sparks and 'S' in sparks)).lower()
     kosningar.append({
       'uid': 1234,
       'mixed': mixed,
+      'umfang': kosn.umraeda.umfang,
       'sparks': sparks,
       'titill': kosn.titill
     })
+  kosningar.sort(key=lambda k: -k['umfang'])
 
   t = loader.get_template('althingi/kosningar.html')
   return HttpResponse(t.render(Context(data)))
 
+@cache_control(must_revalidate=False, max_age=86400)
 def static(request, filename):
   if '..' in filename:
     raise AccessDenied
