@@ -11,11 +11,11 @@
 
   <link rel="stylesheet" href="http://www.piratar.is/wp-content/themes/piratar/style.css">
   <link rel="shortcut icon" href="/static/skin/i/fav.ico" />
-  <script src="http://www.piratar.is/wp-content/themes/piratar/_/js/modernizr-1.7.min.js"></script>{% block stylesheets %}{% endblock %}
+{% block header %}{% endblock %}
+{% block stylesheets %}{% endblock %}
+  <script src="http://www.piratar.is/wp-content/themes/piratar/_/js/modernizr-1.7.min.js"></script>
   <script language='javascript'>{% block javascript %}{% endblock %}</script>
   <style type="text/css">{% block css %}{% endblock %}</style>
-{% block header %}{% endblock %}
-
 </head>
 <body class="home blog">
 
@@ -29,7 +29,7 @@
         <ul id="menu-header-menu" class="menu">{% block header_menu %}
           <li id="menu-item-01" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="/thingmenn/">Þingmenn</a></li>
           <li id="menu-item-02" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="/kosningar/">Kosningar</a></li>
-          <li id="menu-item-03" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://www.piratar.is/um-althingisryninn/">Um Alþingisrýninn</a></li>
+          <li id="menu-item-03" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://www.piratar.is/um-althingisryninn/">Um Rýninn</a></li>
           <li id="menu-item-04" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://www.piratar.is/">Píratar</a></li>
         {% endblock %}</ul>
       </nav>                     

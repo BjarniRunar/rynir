@@ -1,19 +1,84 @@
 {% extends base %}
-{% block css %}
-  .mixed_true {background: #7f7;}
-  .mixed_false a {color: #555;}
+{% block header %}
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+  <script src="/static/jquery.sparkline.min.js"></script>
 {% endblock %}
-
+{% block css %}
+  table.kosningar {margin: 10px auto;}
+  table.kosningar tr {margin: 2px; border-bottom: 1px solid #eee;}
+  table.kosningar tr.mixed_false {opacity: 0.35}
+  table.kosningar td {vertical-align: bottom;}
+  table.kosningar td tt {font-size: 0.5em;}
+  p.explain {width: 400px; margin: 0px auto 15px auto; font-weight: bold;}
+{% endblock %}
+{% block javascript %}
+  var parties = ' _DBSVO';
+  var partyColors = {
+    'D': 'blue',
+    'S': 'red',
+    'B': 'green',
+    'V': 'orange',
+    'O': 'cyan',
+    '_': 'grey'
+  };
+  var tooltipValues = $.range_map({
+    '-6': 'Nei (O)',
+    '-5': 'Nei (V)',
+    '-4': 'Nei (S)',
+    '-3': 'Nei (B)',
+    '-2': 'Nei (D)',
+    '-1': 'Nei',
+    '0': 'Sat hjá eða fjarverandi',
+    '1': 'Já',
+    '2': 'Já (D)',
+    '3': 'Já (B)',
+    '4': 'Já (S)',
+    '5': 'Já (V)',
+    '6': 'Já (O)'
+  });
+{% endblock %}
 {% block content %}
 
-<table style='margin: 10px auto;'>
+  <p class='explain'>
+    Hér má sjá yfirlit yfir umdeildustu málin sem kosið var um á líðandi
+    kjörtímabili. Litirnir sýna hvernig atkvæði dreifðust.
+  </p>
+
+  <table class='kosningar'>
 {% for kosn in kosningar %}
- <tr class='mixed_{{ kosn.mixed }}'>
-  <td><a href='/kosningar/{{ kosn.uid }}'>{{ kosn.titill }}</a></td>
-  <td><tt style='font-size: 0.5em;'><img src='/sparks/{{ kosn.sparks }}'
-                                         alt='{{ kosn.sparks }}'></tt></td>
- </tr>
+    <tr class='mixed_{{ kosn.mixed }}'>
+      <td class='titill'><a href='/kosningar/{{ kosn.uid }}'>{{ kosn.titill }}</a></td>
+      <td class='sparks'><tt>{{ kosn.sparks }}</tt></td>
+    </tr>
 {% endfor %}
-</table>
+  </table>
+
+  <script language="javascript">
+    $('tt').each(function(index, elem) {
+      var data = $(elem).html();
+      var bars = [];
+      var colors = [];
+      for (var i = 0; i < data.length/2; i++) {
+        var party = data.charAt(i*2);
+        var vote = data.charAt(i*2+1);
+        colors.push(partyColors[party]);
+        if (vote == 'J') {
+          bars.push(parties.indexOf(party));
+        }
+        else if (vote == 'N') {
+          bars.push(-parties.indexOf(party));
+        }
+        else {
+          bars.push(0);
+        }
+      }
+      $(elem).sparkline(bars, {
+        type: 'tristate',
+        colorMap: colors,
+        tooltipValueLookups: tooltipValues
+      });
+    });
+  </script>
 
 {% endblock %}

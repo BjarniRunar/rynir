@@ -21,6 +21,14 @@ ADMINS = (
 MANAGERS = ADMINS
 
 RYNIR_DIR = ROOT_DIR + '/rynir'
+RYNIR_BOKSTAFIR = {
+  'Ut': '_',
+  'Vi': 'V',
+  'Sa': 'S',
+  'Sj': 'D',
+  'Fr': 'B',
+  'Hr': 'O'
+}
 
 DATABASES = {
     'default': DEFAULT_DB
