@@ -43,7 +43,7 @@ class ScraperParserFundarmal(ScraperParserHTML):
             svar = elem.b.string.replace('&nbsp;', '').strip()[:-1]
 
           elif name == 'dd':
-            folk = elem.string.replace('.', '').strip().split(', ')
+            folk = elem.string.replace('.', '').replace('*', '').strip().split(', ')
             if svar.startswith('j'):
               ja = folk
             elif svar.startswith('n'):
@@ -53,9 +53,9 @@ class ScraperParserFundarmal(ScraperParserHTML):
             satuhja = SATUHJA_RE.search(elem.string or '')
             fjarstaddir = FJARSTADDIR_RE.search(elem.string or '')
             if satuhja:
-              sh = satuhja.group(1).replace('.', '').strip().split(', ')
+              sh = satuhja.group(1).replace('.', '').replace('*', '').strip().split(', ')
             elif fjarstaddir:
-              fj = fjarstaddir.group(1).replace('.', '').strip().split(', ')
+              fj = fjarstaddir.group(1).replace('.', '').replace('*', '').strip().split(', ')
 
             if not (elem.string and elem.string.strip()): break
 
@@ -76,13 +76,15 @@ class ScraperParserFundarmal(ScraperParserHTML):
 
         nu = Umraeda(uid=uid,
                      fundur=Fundur.objects.filter(fnr=fnr, lth=lth)[0],
+                     umfang=len(data),
                      timi=dagstimi,
                      efni=efni,
                      #url_ferill=,
                      titill=soup.h2.string)
         nu.save()
 
-        nk = Kosning(umraeda=nu,
+        nk = Kosning(uid=uid,
+                     umraeda=nu,
                      titill=soup.h2.string,
                      timi=dagstimi, # FIXME: wrong?
                      url_skjal='')

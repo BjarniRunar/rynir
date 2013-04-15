@@ -1,3 +1,5 @@
+import threading
+import time
 from django.http import HttpResponse, Http404
 
 import settings
@@ -28,7 +30,30 @@ def scrape(request, proto=None, domain=None, path=None):
     # FIXME: Process the ScraperJob queue?
     return HttpResponse('Should process queue?')
 
+
+class BootStrapper(threading.Thread):
+  def run(self):
+    mp = metaparser.MetaParser()
+    mp.bootstrap()
+
+    # FIXME: Manually add some metadata to the political parties.
+    for fl in Flokkur.objects.all():
+      stafur = settings.RYNIR_BOKSTAFIR.get(fl.abbr[:2])
+      if stafur:
+        fl.stafur = stafur
+        fl.save()
+
+    # FIXME: This is hard-coding the values for the 138-141st term.
+    for t in (141, 140, 139, 138):
+      for i in range(1, 169+1):
+        mp.scrape_and_parse(('http://www.althingi.is/altext/%d/f%3.3d.sgml'
+                             ) % (t, i))
+        #time.sleep(2)
+
+
+
 def bootstrap(request):
-  metaparser.MetaParser().bootstrap()
-  return HttpResponse('OK')
-  
+  BootStrapper().start()
+  return HttpResponse('OK, started background bootstrap thread.\n'
+                      'This takes about 15 minutes.')
+

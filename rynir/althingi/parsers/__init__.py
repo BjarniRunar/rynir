@@ -1,1 +1,1 @@
-__all__ = ["metaparser", "fundur", "fundarmal", "thingmenn", "flokkar"]
+__all__ = ["metaparser", "thingmenn", "fundur", "fundarmal"]

@@ -1,3 +1,4 @@
+import datetime
 import re
 import traceback
 
@@ -28,6 +29,7 @@ class ScraperParserThingmenn(ScraperParserHTML):
 
     # <tr><td ...><nobr><a href="/altext/cv.php4?...">Ossur ...</a> (OS)
     for tr in soup.fetch('tr'):
+      nr = nafn = stafir = existing = flokkur = flokkabbr = None
       for td in tr.fetch('td', {}, False):
         for nobr in td.fetch('nobr', {}, False):
           for a in nobr.fetch('a'):
@@ -37,21 +39,40 @@ class ScraperParserThingmenn(ScraperParserHTML):
                 nr = cv_url.rsplit('=', 1)[1]
                 nafn = a.string
                 stafir = SKAMMSTOFUN_RE.search(unicode(nobr)).group(1)
-
-                existing = Thingmadur.objects.filter(stafir=stafir)
-                if existing:
-                  thm = existing[0]
-                else:
-                  thm = Thingmadur()
-                
-                thm.nafn = nafn
-                thm.stafir = stafir
-                thm.url_vefs = urlbase + cv_url[1:]
-                thm.url_mynd = MYND_URL % {'nr': nr}
-                thm.save()
-                print '%s is %s' % (stafir, nafn)
               except:
                 traceback.print_exc()
+          # <NOBR><abbr title="Framsoknarflokkur">Framsfl.</abbr>&nbsp;</NOBR>
+          for abbr in nobr.fetch('abbr'):
+            flokkur = abbr.get('title')
+            flokkabbr = abbr.string[:-1]
+
+      if nr and nafn and stafir:
+        existing = Thingmadur.objects.filter(stafir=stafir)
+        if existing:
+          thm = existing[0]
+        else:
+          thm = Thingmadur()
+          print 'Thingmadur: %s (%s)' % (nafn, stafir)
+
+        thm.nafn = nafn
+        thm.stafir = stafir
+        thm.url_vefs = urlbase + cv_url[1:]
+        thm.url_mynd = MYND_URL % {'nr': nr}
+        thm.save()
+
+        fl = Flokkur.objects.filter(abbr=flokkabbr)
+        if fl:
+          fl = fl[0]
+        else:
+          print 'Flokkur: %s (%s)' % (flokkur, flokkabbr)
+          fl = Flokkur(abbr=flokkabbr, nafn=flokkur)
+          fl.save()
+
+        thmfl = thm.flokkur()
+        if not thmfl or thmfl.abbr != flokkabbr:
+          print 'Added %s to %s' % (stafir, flokkabbr)
+          Flokksseta(flokkur=fl, thingmadur=thm,
+                     upphaf=datetime.datetime.now()).save()
 
     return True
 
