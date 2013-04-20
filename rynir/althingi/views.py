@@ -22,22 +22,40 @@ def index(request):
   })
   return HttpResponse(t.render(c))
 
-@cache_control(must_revalidate=False, max_age=3600)
+#@cache_control(must_revalidate=False, max_age=3600)
 def thingmenn(request, thingmadur_id=None):
+  flokkar = []
   thingmenn = []
   data = {
     'base': settings.TEMPLATE_BASE,
+    'flokkar': flokkar,
     'thingmenn': thingmenn
   }
 
+  fl_thm = {}
+  for fl in Flokkur.objects.order_by('nafn'):
+    fl_thm[fl.stafur] = []
+    flokkar.append({
+      'nafn': fl.nafn,
+      'stafur': fl.stafur,
+      'lysing': fl.lysing,
+      'url': fl.url_vefs,
+      'mynd': fl.url_mynd,
+      'thingmenn': fl_thm[fl.stafur]
+    })
+
   for thm in Thingmadur.objects.order_by('nafn'):
-    thingmenn.append({
+    info = {
       'nafn':   thm.nafn,
       'stafir': thm.stafir,
       'stafur': thm.nafn[0].lower(),
+      'flokkur': thm.flokkur(),
+      'flokksstafur': thm.flokkur().stafur,
       'url':    thm.url_vefs,
       'mynd':   thm.url_mynd
-    })
+    }
+    fl_thm[thm.flokkur().stafur].append(info)
+    thingmenn.append(info)
 
   if thingmadur_id:
     data['thingmadur'] = {
@@ -54,18 +72,23 @@ def kosningar(request, kosning_uid=None):
     'kosningar': kosningar
   }
   for kosn in Kosning.objects.order_by('timi'):
-    sparks = kosn.sparks()
-    mixed = str(('afbrig' in kosn.titill.lower()) or
-                ('J' in sparks and 'N' in sparks) or
-                ('F' in sparks and 'S' in sparks)).lower()
-    kosningar.append({
-      'uid': 1234,
-      'mixed': mixed,
-      'umfang': kosn.umraeda.umfang,
-      'sparks': sparks,
-      'titill': kosn.titill
-    })
+    try:
+      sparks = kosn.sparks()
+      mixed = str(('afbrig' in kosn.titill.lower()) or
+                  ('J' in sparks and 'N' in sparks) or
+                  ('F' in sparks and 'S' in sparks)).lower()
+      kosningar.append({
+        'uid': 1234,
+        'mixed': mixed,
+        'umfang': kosn.umraeda.umfang,
+        'sparks': sparks,
+        'titill': kosn.titill
+      })
+    except Umraeda.DoesNotExist:
+      pass
   kosningar.sort(key=lambda k: -k['umfang'])
+  data['topp50'] = kosningar[:50]
+  data['topp100'] = kosningar[:100]
 
   t = loader.get_template('althingi/kosningar.html')
   return HttpResponse(t.render(Context(data)))

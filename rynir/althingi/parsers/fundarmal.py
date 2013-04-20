@@ -99,6 +99,8 @@ class ScraperParserFundarmal(ScraperParserHTML):
             except IndexError:
               print 'Othekkur thingmadur: %s (%s)' % (stafir, svar)
 
+        nk.sparks()
+
     return True
 
 RegisterScraperParser(ScraperParserFundarmal)

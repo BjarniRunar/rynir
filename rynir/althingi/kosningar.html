@@ -8,8 +8,9 @@
   table.kosningar {margin: 10px auto;}
   table.kosningar tr {margin: 2px; border-bottom: 1px solid #eee;}
   table.kosningar tr.mixed_false {opacity: 0.35}
-  table.kosningar td {vertical-align: bottom;}
+  table.kosningar td {vertical-align: middle;}
   table.kosningar td tt {font-size: 0.5em;}
+  table.kosningar td.Xsparks {text-align: right; padding-right: 5px;}
   p.explain {width: 400px; margin: 0px auto 15px auto; font-weight: bold;}
 {% endblock %}
 {% block javascript %}
@@ -29,7 +30,7 @@
     '-3': 'Nei (B)',
     '-2': 'Nei (D)',
     '-1': 'Nei',
-    '0': 'Sat hjá eða fjarverandi',
+    '0': 'Sat hjá',
     '1': 'Já',
     '2': 'Já (D)',
     '3': 'Já (B)',
@@ -41,12 +42,12 @@
 {% block content %}
 
   <p class='explain'>
-    Hér má sjá yfirlit yfir umdeildustu málin sem kosið var um á líðandi
+    Hér má sjá yfirlit yfir 100 umdeildustu málin sem kosið var um á líðandi
     kjörtímabili. Litirnir sýna hvernig atkvæði dreifðust.
   </p>
 
   <table class='kosningar'>
-{% for kosn in kosningar %}
+{% for kosn in topp100 %}
     <tr class='mixed_{{ kosn.mixed }}'>
       <td class='titill'><a href='/kosningar/{{ kosn.uid }}'>{{ kosn.titill }}</a></td>
       <td class='sparks'><tt>{{ kosn.sparks }}</tt></td>
@@ -62,17 +63,21 @@
       for (var i = 0; i < data.length/2; i++) {
         var party = data.charAt(i*2);
         var vote = data.charAt(i*2+1);
-        colors.push(partyColors[party]);
-        if (vote == 'J') {
-          bars.push(parties.indexOf(party));
-        }
-        else if (vote == 'N') {
-          bars.push(-parties.indexOf(party));
-        }
-        else {
-          bars.push(0);
+        if (vote != 'F') {
+          colors.push(partyColors[party]);
+          if (vote == 'J') {
+            bars.push(parties.indexOf(party));
+          }
+          else if (vote == 'N') {
+            bars.push(-parties.indexOf(party));
+          }
+          else {
+            bars.push(0);
+          }
         }
       }
+      //bars.reverse();
+      //colors.reverse();
       $(elem).sparkline(bars, {
         type: 'tristate',
         colorMap: colors,
