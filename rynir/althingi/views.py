@@ -52,6 +52,8 @@ def thingmenn(request, thingmadur_id=None):
       'stafur': thm.nafn[0].lower(),
       'flokkur': thm.flokkur(),
       'flokksstafur': thm.flokkur().stafur,
+      'maeting': thm.maeting(),
+      'hlydni': thm.hlydni(),
       'url':    thm.url_vefs,
       'mynd':   thm.url_mynd
     }
