@@ -90,14 +90,32 @@ class ScraperParserFundarmal(ScraperParserHTML):
                      url_skjal='')
         nk.save()
 
+        thingmenn = {}
         for svar, folk in (('J', ja), ('N', nei), ('F', fj), ('S', sh)):
           for stafir in folk:
             try:
-              Atkvaedi(kosning=nk,
-                       thingmadur=Thingmadur.objects.filter(stafir=stafir)[0],
-                       atkvaedi=svar).save()
+              thm = Thingmadur.objects.filter(stafir=stafir)[0]
+              thingmenn[stafir] = {
+                'thm': thm,
+                'fl': thm.flokkur(), # FIXME: Dags?
+                'svar': svar
+              }
             except IndexError:
               print 'Othekkur thingmadur: %s (%s)' % (stafir, svar)
+
+        for stafir, info in thingmenn.iteritems():
+           agree = disagree = 0
+           for st, nfo in thingmenn.iteritems():
+             if nfo['fl'] == info['fl']:
+               if nfo['svar'] == info['svar']:
+                 agree += 1
+               else:
+                 disagree += 1
+           Atkvaedi(kosning=nk,
+                    thingmadur=info['thm'],
+                    uppreisn=(disagree > agree),
+                    atkvaedi=info['svar']).save()
+           info['thm'].drop_caches()
 
         nk.sparks(refresh=True)
 

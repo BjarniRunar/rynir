@@ -11,12 +11,30 @@ class Flokkur(models.Model):
   url_mynd = models.CharField(max_length=200)
 
 class Thingmadur(models.Model):
+  althingi_id = models.CharField(max_length=10)
   nafn = models.CharField(max_length=100)
   stafir = models.CharField(max_length=10)
   url_vefs = models.CharField(max_length=200)
   url_mynd = models.CharField(max_length=200)
-  cached_maeting = models.IntegerField(null=True)
-  cached_hlydni = models.IntegerField(null=True)
+  varamadur = models.BooleanField()
+  iframbodifyrir = models.CharField(max_length=1)
+  cached_vidvera = models.IntegerField(null=True)
+  cached_skropadi = models.IntegerField(null=True)
+  cached_uppreisnir = models.IntegerField(null=True)
+
+  def kaus(self, atkv):
+    return Atkvaedi.objects.filter(thingmadur=self, atkvaedi=atkv
+                                   ).order_by('-kosning__umraeda__umfang')
+
+  def kaus_ja(self): return self.kaus('J')
+  def kaus_nei(self): return self.kaus('N')
+  def kaus_ekki(self): return self.kaus('S')
+  def kaus_skrop(self): return self.kaus('F')
+
+  def kaus_uppreisn(self):
+    return Atkvaedi.objects.filter(thingmadur=self, uppreisn=True
+                                   ).exclude(atkvaedi='F'
+                                   ).order_by('-kosning__umraeda__umfang')
 
   def flokkur(self, dags=None):
     seta = Flokksseta.objects.filter(thingmadur=self).order_by('-upphaf')
@@ -29,37 +47,42 @@ class Thingmadur(models.Model):
         return s.flokkur
     return None
 
-  def maeting(self, refresh=False):
-    if refresh or self.cached_maeting is None:
-      maettur = Atkvaedi.objects.filter(thingmadur=self
-                                        ).exclude(atkvaedi='F').count()
-      total = Kosning.objects.count()
-      self.cached_maeting = total and int((100 * maettur) / total) or 0
-      self.save()
-    return self.cached_maeting
+  def drop_caches(self):
+    if (self.cached_vidvera is not None or
+        self.cached_skropadi is not None or
+        self.cached_uppreisnir is not None):
+     self.cached_vidvera = self.cached_skropadi = self.cached_uppreisnir = None
+     self.save()
 
-  def hlydni(self, refresh=False):
-    if refresh or self.cached_hlydni is None:
-      maettur = Atkvaedi.objects.filter(thingmadur=self
-                                        ).exclude(atkvaedi='F')
-      hlydni = 0
-      flokkur = self.flokkur()  # FIXME: dags = ??
-      for m in maettur:
-        votes = Atkvaedi.objects.filter(kosning=m.kosning)
-        disagree = agree = 0
-        for v in votes:
-          if flokkur == v.thingmadur.flokkur():
-            if v.atkvaedi == m.atkvaedi:
-              agree += 1
-            else: 
-              disagree += 1
-        if agree > disagree:
-          hlydni += 1
-        elif m.atkvaedi == 'S':
-          hlydni += 0.5
-      self.cached_hlydni = maettur and int((100 * hlydni) / len(maettur)) or 0
+  def vidvera(self, refresh=False):
+    if refresh or self.cached_vidvera is None:
+      self.cached_vidvera = Atkvaedi.objects.filter(thingmadur=self).count()
       self.save()
-    return self.cached_hlydni
+    return self.cached_vidvera or 0
+
+  def skropadi(self, refresh=False):
+    if refresh or self.cached_skropadi is None:
+      self.cached_skropadi = Atkvaedi.objects.filter(thingmadur=self,
+                                                     atkvaedi='F').count()
+      self.save()
+    return self.cached_skropadi or 0
+
+  def uppreisnir(self, refresh=False):
+    if refresh or self.cached_uppreisnir is None:
+      self.cached_uppreisnir = Atkvaedi.objects.filter(thingmadur=self,
+                                                       uppreisn=True
+                                                       ).exclude(atkvaedi='F'
+                                                                 ).count()
+      self.save()
+    return self.cached_uppreisnir or 0
+
+  def maeting(self):
+    return '%.1f' % (10.0 - (10.0 * self.skropadi() / (self.vidvera() or 1)))
+
+  def hlydni(self):
+    if self.flokkur() == '_':
+      return '10.0'
+    return '%.1f' % (10.0 - (10.0 * self.uppreisnir() / (self.vidvera() or 1)))
 
 class Flokksseta(models.Model):
   flokkur = models.ForeignKey(Flokkur)
@@ -102,4 +125,5 @@ class Atkvaedi(models.Model):
   kosning = models.ForeignKey(Kosning)
   thingmadur = models.ForeignKey(Thingmadur)
   atkvaedi = models.CharField(max_length=5)
+  uppreisn = models.BooleanField()
 

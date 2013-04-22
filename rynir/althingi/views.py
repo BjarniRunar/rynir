@@ -15,7 +15,7 @@ def AccessDenied(Exception):
 
 ## Views ##
 
-@cache_control(must_revalidate=False, max_age=3600)
+@cache_control(must_revalidate=False, max_age=900)
 def index(request):
   t = loader.get_template('althingi/index.html')
   c = Context({
@@ -23,51 +23,46 @@ def index(request):
   })
   return HttpResponse(t.render(c))
 
-#@cache_control(must_revalidate=False, max_age=3600)
-def thingmenn(request, thingmadur_id=None):
-  flokkar = []
-  thingmenn = []
-  data = {
+#@cache_control(must_revalidate=False, max_age=24*3600)
+def thingmadur(request, althingi_id=None):
+  try:
+    thingmadur = Thingmadur.objects.filter(althingi_id=althingi_id)[0]
+  except IndexError:
+    thingmadur = None
+
+  t = loader.get_template('althingi/thingmadur.html')
+  return HttpResponse(t.render(Context({
     'base': settings.TEMPLATE_BASE,
-    'flokkar': flokkar,
-    'thingmenn': thingmenn
-  }
+    'thingmadur': thingmadur
+  })))
 
-  fl_thm = {}
-  for fl in Flokkur.objects.order_by('nafn'):
-    fl_thm[fl.stafur] = []
-    flokkar.append({
-      'nafn': fl.nafn,
-      'stafur': fl.stafur,
-      'lysing': fl.lysing,
-      'url': fl.url_vefs,
-      'mynd': fl.url_mynd,
-      'thingmenn': fl_thm[fl.stafur]
-    })
+@cache_control(must_revalidate=False, max_age=24*3600)
+def thingmenn(request):
+  thingmenn = [{
+    'thm': thm,
+    'flokkur': thm.flokkur(),
+    'flokksstafur': thm.flokkur().stafur,
+    'skropari': False,
+    'uppreisnarseggur': False
+  } for thm in Thingmadur.objects.order_by('nafn')]
 
-  for thm in Thingmadur.objects.order_by('nafn'):
-    info = {
-      'nafn':   thm.nafn,
-      'stafir': thm.stafir,
-      'stafur': thm.nafn[0].lower(),
-      'flokkur': thm.flokkur(),
-      'flokksstafur': thm.flokkur().stafur,
-      'maeting': thm.maeting(),
-      'hlydni': thm.hlydni(),
-      'url':    thm.url_vefs,
-      'mynd':   thm.url_mynd
-    }
-    fl_thm[thm.flokkur().stafur].append(info)
-    thingmenn.append(info)
+  thingmenn.sort(key=lambda t: float(t['thm'].maeting()))
+  for ti in [t for t in thingmenn if not t['thm'].varamadur][:12]:
+    ti['skropari'] = True
 
-  thingmenn.sort(key=lambda t: t['nafn'], cmp=locale.strcoll)
+  thingmenn.sort(key=lambda t: float(t['thm'].hlydni()))
+  for ti in [t for t in thingmenn if not t['thm'].varamadur][:12]:
+    ti['uppreisnarseggur'] = True
 
-  if thingmadur_id:
-    data['thingmadur'] = {
-    }
+  # Sort by name
+  thingmenn.sort(key=lambda t: t['thm'].nafn, cmp=locale.strcoll)
 
   t = loader.get_template('althingi/thingmenn.html')
-  return HttpResponse(t.render(Context(data)))
+  return HttpResponse(t.render(Context({
+    'base': settings.TEMPLATE_BASE,
+    'flokkar': Flokkur.objects.order_by('nafn'),
+    'thingmenn': thingmenn
+  })))
 
 @cache_control(must_revalidate=False, max_age=3600)
 def kosningar(request, kosning_uid=None):
@@ -98,7 +93,7 @@ def kosningar(request, kosning_uid=None):
   t = loader.get_template('althingi/kosningar.html')
   return HttpResponse(t.render(Context(data)))
 
-@cache_control(must_revalidate=False, max_age=86400)
+@cache_control(must_revalidate=False, max_age=24*3600)
 def static(request, filename):
   if '..' in filename:
     raise AccessDenied

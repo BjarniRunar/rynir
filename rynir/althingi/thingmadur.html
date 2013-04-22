@@ -1,0 +1,67 @@
+{% extends base %}
+{% block header %}
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+{% endblock %}
+{% block javascript %}
+  function imgError(source) {
+    source.src = "/static/althingi-logo.png";
+    source.onerror = "";
+    return true;
+  }
+{% endblock %}
+{% block css %}
+  #thingmadur {width: 700px; margin: 0 auto;}
+  .althingi {float: right; width: 200px; text-align: center;}
+  .althingi img {max-width: 100%;}
+  th, td {text-align: left; padding-right: 5px;}
+{% endblock %}
+{% block content %}
+{% if thingmadur %}
+  <div id='thingmadur'>
+    <a class='althingi' target='_blank' href='{{ thingmadur.url_vefs }}'>
+      <img src='{{ thingmadur.url_mynd }}' onError='imgError(this);'>
+      Æviágrip á Alþingi.is
+    </a>
+    <h3 class='nafn'>{{ thingmadur.nafn }}</h3>
+    <h4 class='flokkur'><a href='/thingmenn/#thmfl_{{ thingmadur.flokkur.stafur }}'>{{ thingmadur.flokkur.nafn }}</a></h4>
+    <table>
+      <tr class='h'><th>Hlýðni:  </th><td>{{ thingmadur.hlydni }}
+                                         ({{ thingmadur.uppreisnir }} uppreisnir)</td></tr>
+      <tr class='m'><th>Mæting:  </th><td>{{ thingmadur.maeting }}
+                                         ({{ thingmadur.skropadi }} fjarvistir)</td></tr>
+      <tr class='j'><th>Kaus já: </th><td>{{ thingmadur.kaus_ja.count }}</td></tr>
+      <tr class='n'><th>Kaus nei:</th><td>{{ thingmadur.kaus_nei.count }}</td></tr>
+      <tr class='s'><th>Sat hjá: </th><td>{{ thingmadur.kaus_ekki.count }}</td></tr>
+    </table>
+    <div class='kaus_uppreisn'>
+      <h5>Uppreisnir</h2><ul>{% for a in thingmadur.kaus_uppreisn|slice:":10" %}
+        <li>{{ a.atkvaedi }}: {{ a.kosning.umraeda.titill }}</li>
+      {% endfor %}</ul>
+    </div>
+    <div class='kaus_ja'>
+      <h5>Kaus já</h2><ul>{% for a in thingmadur.kaus_ja|slice:":10" %}
+        <li>{{ a.atkvaedi }}: {{ a.kosning.umraeda.titill }}</li>
+      {% endfor %}</ul>
+    </div>
+    <div class='kaus_nei'>
+      <h5>Kaus nei</h2><ul>{% for a in thingmadur.kaus_nei|slice:":10" %}
+        <li>{{ a.atkvaedi }}: {{ a.kosning.umraeda.titill }}</li>
+      {% endfor %}</ul>
+    </div>
+    <div class='kaus_ekki'>
+      <h5>Sat hjá</h2><ul>{% for a in thingmadur.kaus_ekki|slice:":10" %}
+        <li>{{ a.atkvaedi }}: {{ a.kosning.umraeda.titill }}</li>
+      {% endfor %}</ul>
+    </div>
+  </div>
+{% else %}
+  <h2>Enginn þingmaður fannst... úbs!</h2>
+{% endif %}
+  <script language='javascript'>
+    $('.sel').click(function() {
+      setTimeout("updateSelection();", 25); return true;
+    });
+    updateSelection();
+  </script>
+{% endblock %}

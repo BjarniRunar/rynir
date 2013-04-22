@@ -26,6 +26,7 @@ class ScraperParserThingmenn(ScraperParserHTML):
     soup = ScraperParserHTML.parse(self, url, data,
                                    fromEncoding=(fromEncoding or 'windows-1252'))
     urlbase, urldir = self.urls(url)
+    varamenn = ('tegund=[V]' in url) and True or False
 
     # <tr><td ...><nobr><a href="/altext/cv.php4?...">Ossur ...</a> (OS)
     for tr in soup.fetch('tr'):
@@ -54,10 +55,12 @@ class ScraperParserThingmenn(ScraperParserHTML):
           thm = Thingmadur()
           print 'Thingmadur: %s (%s)' % (nafn, stafir)
 
+        thm.althingi_id = nr
         thm.nafn = nafn
         thm.stafir = stafir
         thm.url_vefs = urlbase + cv_url[1:]
         thm.url_mynd = MYND_URL % {'nr': nr}
+        thm.varamadur = varamenn
         thm.save()
 
         fl = Flokkur.objects.filter(abbr=flokkabbr)

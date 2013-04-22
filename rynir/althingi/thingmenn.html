@@ -31,7 +31,16 @@
     } else if (selection.substring(1, 7) == 'thmfl_') {
       $('.thm').hide();
       $('.thm_fl_'+selection.substring(7, 8)).show();
-    } else if (selection == '#thmallir' || selection == '' || selection == '#') {
+    } else if (selection == '#skroparar') {
+      $('.thm').hide();
+      $('.thm_skropari').show();
+    } else if (selection == '#uppreisnarseggir') {
+      $('.thm').hide();
+      $('.thm_uppreisnarseggur').show();
+    } else if (selection == '#x13') {
+      $('.thm').hide();
+      $('.thm_x13').show();
+    } else if (selection == '#allir' || selection == '') {
       $('.thm').show();
     }
   }
@@ -63,13 +72,11 @@
   .fl {font-size: 0.8em; padding: 0 0.5em; margin: 2px 0; display: inline-block;}
 {% endblock %}
 {% block content %}
-{% if thingmadur %}
-  <div id='thingmadur'>
-
-  </div>
-{% else %}
   <div id='flokkar'>
-    <a class='sel fl' href='#'>Allir þingmenn</a><br>
+    <a class='sel fl' href='#allir'>Allir þingmenn</a><br>
+    <a class='sel fl' href='#skroparar'>Skróparar</a
+   ><a class='sel fl' href='#x13'>Framboð 2013</a
+   ><a class='sel fl' href='#uppreisnarseggir'>Uppreisnarseggir</a><br>
     <a class='sel fl' href='#thm_aábcdðAÁBCDÐ'>A Á B D</a
    ><a class='sel fl' href='#thm_eéfgEÉFG'>E É F G</a
    ><a class='sel fl' href='#thm_hiíjHIÍJ'>H I Í J</a
@@ -77,30 +84,28 @@
    ><a class='sel fl' href='#thm_oópqrOÓPQR'>O Ó P R</a
    ><a class='sel fl' href='#thm_stuúvwSTUÚVW'>S T U Ú V</a
    ><a class='sel fl' href='#thm_xyýzþæöXYÝZÞÆÖ'>Y Ý Ö Æ Þ</a
-   ><br>
-{% for flokkur in flokkar %}<a class='sel fl' href='#thmfl_{{ flokkur.stafur }}'>{{ flokkur.nafn }}
-</a>{% endfor %}
+   ><br>{% for fl in flokkar %}
+   <a class='sel fl' href='#thmfl_{{ fl.stafur }}'>{{ fl.nafn }}</a>{% endfor %}
   </div><hr>
   <div id='thingmenn'>
-{% for thingmadur in thingmenn %}
-    <div class='thm thm_fl_{{ thingmadur.flokksstafur }} stafur_{{ thingmadur.stafur }}'
-         id='thm_{{ thingmadur.stafir }}'>
-      <p class='info'>{% if not thingmadur.flokksstafur == '_' %}
-        <span class='flokkur'>{{ thingmadur.flokksstafur }}</span>{% endif %}
-        <a href='/thingmenn/{{ thingmadur.stafir }}/'>
-          <img src='{{ thingmadur.mynd }}' alt='' onError='imgError(this);'>
-          <span class='nafn'>{{ thingmadur.nafn }}</span>
+{% for ti in thingmenn %}
+    <div class='thm thm_fl_{{ ti.flokksstafur }} {% if ti.thm.iframbodifyrir %}thm_x13 {% endif %}{% if ti.skropari %}thm_skropari {% endif %}{% if ti.uppreisnarseggur %}thm_uppreisnarseggur {% endif %}'
+         id='thm_{{ ti.thm.stafir }}'>
+      <p class='info'>{% if not ti.flokksstafur == '_' %}
+        <span class='flokkur'>{{ ti.flokksstafur }}</span>{% endif %}
+        <a href='/thingmenn/{{ ti.thm.althingi_id }}/'>
+          <img src='{{ ti.thm.url_mynd }}' alt='' onError='imgError(this);'>
+          <span class='nafn'>{{ ti.thm.nafn }}</span>
         </a>
       </p>
-      <ul class='stats'>
-        <li class='m'>{{ thingmadur.maeting }}%</li>
-        <li class='h'>{{ thingmadur.hlydni }}%</li>
+      <ul class='stats'>{% if not ti.flokksstafur == '_' %}
+        <li class='h'>{{ ti.thm.hlydni }}</li>{% endif %}
+        <li class='m'>{{ ti.thm.maeting }}{% if ti.thm.varamadur %} <span title='Varamaður'>(v)</span>{% endif %}</li>
       </ul>
-      <a class='bio' href='{{ thingmadur.url }}'>æviágrip</a>
+      <a class='bio' target='_blank' href='{{ ti.thm.url_vefs }}'>æviágrip</a>
     </div>
 {% endfor %}
   </div>
-{% endif %}
   <script language='javascript'>
     $('.sel').click(function() {
       setTimeout("updateSelection();", 25); return true;
