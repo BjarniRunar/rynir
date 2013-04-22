@@ -1,5 +1,8 @@
 # Rynir project settings
 
+import locale
+locale.setlocale(locale.LC_ALL, '')
+
 try:
     from local_settings import *
 except ImportError:

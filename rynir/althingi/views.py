@@ -1,3 +1,4 @@
+import locale
 import os
 
 from django.http import HttpResponse, Http404
@@ -56,6 +57,8 @@ def thingmenn(request, thingmadur_id=None):
     }
     fl_thm[thm.flokkur().stafur].append(info)
     thingmenn.append(info)
+
+  thingmenn.sort(key=lambda t: t['nafn'], cmp=locale.strcoll)
 
   if thingmadur_id:
     data['thingmadur'] = {
