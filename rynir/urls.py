@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     (r'^thingmenn/?$',                            'althingi.views.thingmenn'),
     (r'^thingmenn/(?P<althingi_id>[^/]+)/?$',     'althingi.views.thingmadur'),
     (r'^kosningar/?$',                            'althingi.views.kosningar'),
-    (r'^kosningar/(?P<kosning_uid>[^/]+)/?$',     'althingi.views.kosning'),
+    (r'^kosningar/(?P<kosning_uid>.+?)/?$',       'althingi.views.kosning'),
 
     # Scraper
     (r'^scrape/(?P<proto>https?)(?::/)?/(?P<domain>[^/]+)/(?P<path>.*)$',

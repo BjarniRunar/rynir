@@ -22,12 +22,18 @@ class ScraperParserFundarmal(ScraperParserHTML):
     dt = DAGSTIMI_RE.search(soup.title.string)
     dagstimi = dt.group(1)
 
+    urlbase, urldir = self.urls(url)
+    ferill = url
+
     lth, fnr = None, None
     for a in soup.fetch('a'):
-      l, f = url_to_lth_fnr(a.get('href', ''))
-      if l and f:
-        lth, fnr = l, f
-        break
+      href = a.get('href', a.get('HREF', ''))
+      if not lth and not fnr:
+        l, f = url_to_lth_fnr(href)
+        if l and f:
+          lth, fnr = l, f
+      if ('ferill.pl' in href) and href.startswith('/'):
+        ferill = urlbase + href
 
     for para in soup.fetch('p'):
       brtt = para.a
@@ -79,7 +85,7 @@ class ScraperParserFundarmal(ScraperParserHTML):
                      umfang=len(data),
                      timi=dagstimi,
                      efni=efni,
-                     #url_ferill=,
+                     url_ferill=ferill,
                      titill=soup.h2.string)
         nu.save()
 
@@ -105,12 +111,13 @@ class ScraperParserFundarmal(ScraperParserHTML):
 
         for stafir, info in thingmenn.iteritems():
            agree = disagree = 0
-           for st, nfo in thingmenn.iteritems():
-             if nfo['fl'] == info['fl']:
-               if nfo['svar'] == info['svar']:
-                 agree += 1
-               else:
-                 disagree += 1
+           if info['svar'] != 'F':
+             for st, nfo in thingmenn.iteritems():
+               if (nfo['svar'] != 'F') and (nfo['fl'] == info['fl']):
+                 if nfo['svar'] == info['svar']:
+                   agree += 1
+                 else:
+                   disagree += 1
            Atkvaedi(kosning=nk,
                     thingmadur=info['thm'],
                     uppreisn=(disagree > agree),

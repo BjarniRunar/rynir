@@ -7,11 +7,11 @@
 {% block css %}
   table.kosningar {margin: 10px auto;}
   table.kosningar tr {margin: 2px; border-bottom: 1px solid #eee;}
-  table.kosningar tr.mixed_false {opacity: 0.35}
   table.kosningar td {vertical-align: middle;}
   table.kosningar td tt {font-size: 0.5em;}
+  table.kosningar td.titill {padding-right: 10px; padding-left: 10px;}
   table.kosningar td.Xsparks {text-align: right; padding-right: 5px;}
-  p.explain {width: 400px; margin: 0px auto 15px auto; font-weight: bold;}
+  p.explain {width: 560px; margin: 0px auto 15px auto; font-weight: bold;}
 {% endblock %}
 {% block javascript %}
   var parties = ' _DBSVO';
@@ -42,15 +42,17 @@
 {% block content %}
 
   <p class='explain'>
-    Hér má sjá yfirlit yfir 100 umdeildustu málin sem kosið var um á líðandi
-    kjörtímabili. Litirnir sýna hvernig atkvæði dreifðust.
+    Hér má sjá yfirlit yfir 100 umdeildustu málin sem kosið var um á síðasta
+    kjörtímabili. Litirnir sýna hvernig "já", "nei" og "sat hjá" atkvæði
+    dreifðust milli flokka.
   </p>
 
   <table class='kosningar'>
-{% for kosn in topp100 %}
-    <tr class='mixed_{{ kosn.mixed }}'>
-      <td class='titill'><a href='/kosningar/{{ kosn.uid }}'>{{ kosn.titill }}</a></td>
-      <td class='sparks'><tt>{{ kosn.sparks }}</tt></td>
+{% for k in topp100 reversed %}
+    <tr>
+      <td class='dags'>{{ k.timi|date:"Y-m-d" }}</td>
+      <td class='titill'><a href='/kosningar/{{ k.uid }}/'>{{ k.titill|truncatewords:7 }}</a></td>
+      <td class='sparks'><tt>{{ k.sparks }}</tt></td>
     </tr>
 {% endfor %}
   </table>

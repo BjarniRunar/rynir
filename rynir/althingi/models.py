@@ -1,4 +1,5 @@
 import datetime
+import locale
 from django.db import models
 
 
@@ -120,6 +121,23 @@ class Kosning(models.Model):
       self.cached_sparks = ''.join(sparks)
       self.save()
     return self.cached_sparks
+
+  def atkvaedi(self, v):
+    atkv = list(Atkvaedi.objects.filter(kosning=self, atkvaedi=v))
+    atkv.sort(key=lambda a: a.thingmadur.flokkur().stafur + a.thingmadur.nafn,
+              cmp=locale.strcoll)
+    return atkv
+
+  def atkvaedi_ja(self): return self.atkvaedi('J')
+  def atkvaedi_nei(self): return self.atkvaedi('N')
+  def atkvaedi_satuhja(self): return self.atkvaedi('S')
+  def atkvaedi_fjarverandi(self): return self.atkvaedi('F')
+  def atkvaedi_uppreisn(self):
+    atkv = list(Atkvaedi.objects.filter(kosning=self, uppreisn=True
+                                        ).exclude(atkvaedi='F'))
+    atkv.sort(key=lambda a: a.thingmadur.flokkur().stafur + a.thingmadur.nafn,
+              cmp=locale.strcoll)
+    return atkv
 
 class Atkvaedi(models.Model):
   kosning = models.ForeignKey(Kosning)

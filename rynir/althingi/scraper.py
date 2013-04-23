@@ -55,5 +55,5 @@ class BootStrapper(threading.Thread):
 def bootstrap(request):
   BootStrapper().start()
   return HttpResponse('OK, started background bootstrap thread.\n'
-                      'This takes about 15 minutes.')
+                      'This may take quite a while.')
 

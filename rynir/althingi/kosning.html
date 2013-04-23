@@ -1,0 +1,70 @@
+{% extends base %}
+{% block header %}
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+{% endblock %}
+{% block css %}
+  #kosning {margin: 0 auto; width: 650px;}
+  .titill {font-size: 1.5em; margin-left: 25px;}
+  .ferill, .atkvaedi {margin-left: 25px;}
+  .thm_fl_D {border: 3px solid #bbf;}
+  .thm_fl_S {border: 3px solid #faa;}
+  .thm_fl_V {border: 3px solid #fc7;}
+  .thm_fl__ {border: 3px solid #ddd;}
+  .thm_fl_B {border: 3px solid #cfc;}
+  .thm_fl_O {border: 3px solid #eef;}
+  #kosning img {height: 50px;}
+{% endblock %}
+{% block javascript %}
+  function imgError(source) {
+    source.src = "/static/althingi-logo.png";
+    source.onerror = "";
+    return true;
+  }
+{% endblock %}
+{% block content %}
+  <div id=kosning>
+    <h3>Þann {{ kosning.timi|date:"Y-m-d" }} var kosið um:</h3>
+    <p class='titill'>{{ kosning.titill }}</p>
+    <a class='ferill' target="_blank"
+       href='{{ kosning.umraeda.url_ferill }}'>Ferill málsins</a>
+
+    {% if kosning.atkvaedi_uppreisn  %}
+    <h4>Uppreisnarseggir:</h4><p class='atkvaedi'>
+      {% for a in kosning.atkvaedi_uppreisn %}<a href='/thingmenn/{{ a.thingmadur.althingi_id }}/'
+         title='{{ a.atkvaedi }}: {{ a.thingmadur.nafn }}, {{ a.thingmadur.flokkur.nafn }}'
+       ><img class='thm_fl_{{ a.thingmadur.flokkur.stafur }}'
+             src='{{ a.thingmadur.url_mynd }}' alt='' onError='imgError(this);'
+      ></a
+    >{% endfor %}</p>{% endif %}
+    <h4>Já sögðu:</h4><p class='atkvaedi'>
+      {% for a in kosning.atkvaedi_ja %}<a href='/thingmenn/{{ a.thingmadur.althingi_id }}/'
+         title='{{ a.thingmadur.nafn }}, {{ a.thingmadur.flokkur.nafn }}'
+       ><img class='thm_fl_{{ a.thingmadur.flokkur.stafur }}'
+             src='{{ a.thingmadur.url_mynd }}' alt='' onError='imgError(this);'
+      ></a
+    >{% endfor %}</p>
+    <h4>Nei sögðu:</h4><p class='atkvaedi'>
+      {% for a in kosning.atkvaedi_nei %}<a href='/thingmenn/{{ a.thingmadur.althingi_id }}/'
+         title='{{ a.thingmadur.nafn }}, {{ a.thingmadur.flokkur.nafn }}'
+       ><img class='thm_fl_{{ a.thingmadur.flokkur.stafur }}'
+             src='{{ a.thingmadur.url_mynd }}' alt='' onError='imgError(this);'
+      ></a
+    >{% endfor %}</p>
+    <h4>Sátu hjá:</h4><p class='atkvaedi'>
+      {% for a in kosning.atkvaedi_satuhja %}<a href='/thingmenn/{{ a.thingmadur.althingi_id }}/'
+         title='{{ a.thingmadur.nafn }}, {{ a.thingmadur.flokkur.nafn }}'
+       ><img class='thm_fl_{{ a.thingmadur.flokkur.stafur }}'
+             src='{{ a.thingmadur.url_mynd }}' alt='' onError='imgError(this);'
+      ></a
+    >{% endfor %}</p>
+    <h4>Skrópuðu:</h4><p class='atkvaedi'>
+      {% for a in kosning.atkvaedi_fjarverandi %}<a href='/thingmenn/{{ a.thingmadur.althingi_id }}/'
+         title='{{ a.thingmadur.nafn }}, {{ a.thingmadur.flokkur.nafn }}'
+       ><img class='thm_fl_{{ a.thingmadur.flokkur.stafur }}'
+             src='{{ a.thingmadur.url_mynd }}' alt='' onError='imgError(this);'
+      ></a
+    >{% endfor %}</p>
+
+  </div>
+{% endblock %}

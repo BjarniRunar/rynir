@@ -18,6 +18,7 @@
   th, td {text-align: left; padding-right: 10px;}
   .kaus_uppreisn p {font-style: italic; font-size: 0.85em;
                     margin: -15px 25px 10px 25px;}
+  .kaus i {font-size: 0.85em; font-style: normal;}
 {% endblock %}
 {% block content %}
 {% if thingmadur %}
@@ -38,28 +39,32 @@
       <tr class='n'><th>Kaus nei:</th><td>{{ thingmadur.kaus_nei.count }}</td></tr>
       <tr class='s'><th>Sat hjá: </th><td>{{ thingmadur.kaus_ekki.count }}</td></tr>
     </table>{% if not thingmadur.flokkur.stafur == '_' %}
-    <div class='kaus_uppreisn'>
+    <div class='kaus kaus_uppreisn'>
       <h5>Uppreisnir</h2>
       <p>Það telst uppreisn ef þingmaur kýs gegn þorra flokksbræðra og -systra
          sinna, hvort eð er með skýru atkvæði eða með því að sitja hjá. Ef engin
          samstaða er, teljast allir vera í uppreisn.</p>
       <ul>{% for a in thingmadur.kaus_uppreisn|slice:":10" %}
-        <li>{{ a.kosning.umraeda.titill }} ({{ a.atkvaedi }})</li>
+        <li><i>{{ a.kosning.timi|date:"Y-m-d" }}:</i>
+            <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill }}</a> ({{ a.atkvaedi }})</li>
       {% endfor %}</ul>
     </div>{% endif %}
-    <div class='kaus_ja'>
+    <div class='kaus kaus_ja'>
       <h5>Kaus já (J)</h2><ul>{% for a in thingmadur.kaus_ja|slice:":10" %}
-        <li>{{ a.kosning.umraeda.titill }}</li>
+        <li><i>{{ a.kosning.timi|date:"Y-m-d" }}:</i>
+            <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill }}</a></li>
       {% endfor %}</ul>
     </div>
-    <div class='kaus_nei'>
+    <div class='kaus kaus_nei'>
       <h5>Kaus nei (N)</h2><ul>{% for a in thingmadur.kaus_nei|slice:":10" %}
-        <li>{{ a.kosning.umraeda.titill }}</li>
+        <li><i>{{ a.kosning.timi|date:"Y-m-d" }}:</i>
+            <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill }}</a></li>
       {% endfor %}</ul>
     </div>
-    <div class='kaus_ekki'>
+    <div class='kaus kaus_ekki'>
       <h5>Sat hjá (S)</h2><ul>{% for a in thingmadur.kaus_ekki|slice:":10" %}
-        <li>{{ a.kosning.umraeda.titill }}</li>
+        <li><i>{{ a.kosning.timi|date:"Y-m-d" }}:</i>
+            <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill }}</a></li>
       {% endfor %}</ul>
     </div>
   </div>
