@@ -13,8 +13,11 @@
 {% block css %}
   #thingmadur {width: 700px; margin: 0 auto;}
   .althingi {float: right; width: 200px; text-align: center;}
-  .althingi img {max-width: 100%;}
-  th, td {text-align: left; padding-right: 5px;}
+  .althingi img {max-width: 100%; margin-left: 10px;}
+  table {margin: 0 0 0 25px;}
+  th, td {text-align: left; padding-right: 10px;}
+  .kaus_uppreisn p {font-style: italic; font-size: 0.85em;
+                    margin: -15px 25px 10px 25px;}
 {% endblock %}
 {% block content %}
 {% if thingmadur %}
@@ -24,34 +27,39 @@
       Æviágrip á Alþingi.is
     </a>
     <h3 class='nafn'>{{ thingmadur.nafn }}</h3>
-    <h4 class='flokkur'><a href='/thingmenn/#thmfl_{{ thingmadur.flokkur.stafur }}'>{{ thingmadur.flokkur.nafn }}</a></h4>
-    <table>
-      <tr class='h'><th>Hlýðni:  </th><td>{{ thingmadur.hlydni }}
-                                         ({{ thingmadur.uppreisnir }} uppreisnir)</td></tr>
-      <tr class='m'><th>Mæting:  </th><td>{{ thingmadur.maeting }}
+    <h4 class='flokkur'><a href='/thingmenn/#thmfl_{{ thingmadur.flokkur.stafur }}'>{{ thingmadur.flokkur.nafn }}</a>{% if thingmadur.varamadur %}
+                        <small>(varamaður)</small>{% endif %}</h4>
+    <table>{% if not thingmadur.flokkur.stafur == '_' %}
+      <tr class='h'><th>Hlýðni:  </th><td>{{ thingmadur.hlydni }}{% if not thingmadur.hlydni == '10.0' %} &nbsp;
+                                         ({{ thingmadur.uppreisnir }} uppreisnir){% endif %}</td></tr>{% endif %}
+      <tr class='m'><th>Mæting:  </th><td>{{ thingmadur.maeting }} &nbsp;
                                          ({{ thingmadur.skropadi }} fjarvistir)</td></tr>
       <tr class='j'><th>Kaus já: </th><td>{{ thingmadur.kaus_ja.count }}</td></tr>
       <tr class='n'><th>Kaus nei:</th><td>{{ thingmadur.kaus_nei.count }}</td></tr>
       <tr class='s'><th>Sat hjá: </th><td>{{ thingmadur.kaus_ekki.count }}</td></tr>
-    </table>
+    </table>{% if not thingmadur.flokkur.stafur == '_' %}
     <div class='kaus_uppreisn'>
-      <h5>Uppreisnir</h2><ul>{% for a in thingmadur.kaus_uppreisn|slice:":10" %}
-        <li>{{ a.atkvaedi }}: {{ a.kosning.umraeda.titill }}</li>
+      <h5>Uppreisnir</h2>
+      <p>Það telst uppreisn ef þingmaur kýs gegn þorra flokksbræðra og -systra
+         sinna, hvort eð er með skýru atkvæði eða með því að sitja hjá. Ef engin
+         samstaða er, teljast allir vera í uppreisn.</p>
+      <ul>{% for a in thingmadur.kaus_uppreisn|slice:":10" %}
+        <li>{{ a.kosning.umraeda.titill }} ({{ a.atkvaedi }})</li>
       {% endfor %}</ul>
-    </div>
+    </div>{% endif %}
     <div class='kaus_ja'>
-      <h5>Kaus já</h2><ul>{% for a in thingmadur.kaus_ja|slice:":10" %}
-        <li>{{ a.atkvaedi }}: {{ a.kosning.umraeda.titill }}</li>
+      <h5>Kaus já (J)</h2><ul>{% for a in thingmadur.kaus_ja|slice:":10" %}
+        <li>{{ a.kosning.umraeda.titill }}</li>
       {% endfor %}</ul>
     </div>
     <div class='kaus_nei'>
-      <h5>Kaus nei</h2><ul>{% for a in thingmadur.kaus_nei|slice:":10" %}
-        <li>{{ a.atkvaedi }}: {{ a.kosning.umraeda.titill }}</li>
+      <h5>Kaus nei (N)</h2><ul>{% for a in thingmadur.kaus_nei|slice:":10" %}
+        <li>{{ a.kosning.umraeda.titill }}</li>
       {% endfor %}</ul>
     </div>
     <div class='kaus_ekki'>
-      <h5>Sat hjá</h2><ul>{% for a in thingmadur.kaus_ekki|slice:":10" %}
-        <li>{{ a.atkvaedi }}: {{ a.kosning.umraeda.titill }}</li>
+      <h5>Sat hjá (S)</h2><ul>{% for a in thingmadur.kaus_ekki|slice:":10" %}
+        <li>{{ a.kosning.umraeda.titill }}</li>
       {% endfor %}</ul>
     </div>
   </div>

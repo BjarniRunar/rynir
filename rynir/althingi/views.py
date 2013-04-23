@@ -43,6 +43,7 @@ def thingmenn(request):
     'flokkur': thm.flokkur(),
     'flokksstafur': thm.flokkur().stafur,
     'skropari': False,
+    'velmenni': False,
     'uppreisnarseggur': False
   } for thm in Thingmadur.objects.order_by('nafn')]
 
@@ -53,6 +54,12 @@ def thingmenn(request):
   thingmenn.sort(key=lambda t: float(t['thm'].hlydni()))
   for ti in [t for t in thingmenn if not t['thm'].varamadur][:12]:
     ti['uppreisnarseggur'] = True
+
+  thingmenn.sort(key=lambda t: (-float(t['thm'].hlydni()),
+                                -float(t['thm'].maeting())))
+  for ti in [t for t in thingmenn if not t['thm'].varamadur and
+                                     not t['flokksstafur'] == '_'][:12]:
+    ti['velmenni'] = True
 
   # Sort by name
   thingmenn.sort(key=lambda t: t['thm'].nafn, cmp=locale.strcoll)

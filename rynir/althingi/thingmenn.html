@@ -34,6 +34,9 @@
     } else if (selection == '#skroparar') {
       $('.thm').hide();
       $('.thm_skropari').show();
+    } else if (selection == '#velmenni') {
+      $('.thm').hide();
+      $('.thm_velmenni').show();
     } else if (selection == '#uppreisnarseggir') {
       $('.thm').hide();
       $('.thm_uppreisnarseggur').show();
@@ -73,9 +76,10 @@
 {% endblock %}
 {% block content %}
   <div id='flokkar'>
-    <a class='sel fl' href='#allir'>Allir þingmenn</a><br>
+    <a class='sel fl' href='#allir'>Allir þingmenn</a
+   ><a class='sel fl' href='#x13'>Framboð 2013</a><br>
     <a class='sel fl' href='#skroparar'>Skróparar</a
-   ><a class='sel fl' href='#x13'>Framboð 2013</a
+   ><a class='sel fl' href='#velmenni'>Vélmenni</a
    ><a class='sel fl' href='#uppreisnarseggir'>Uppreisnarseggir</a><br>
     <a class='sel fl' href='#thm_aábcdðAÁBCDÐ'>A Á B D</a
    ><a class='sel fl' href='#thm_eéfgEÉFG'>E É F G</a
@@ -89,7 +93,7 @@
   </div><hr>
   <div id='thingmenn'>
 {% for ti in thingmenn %}
-    <div class='thm thm_fl_{{ ti.flokksstafur }} {% if ti.thm.iframbodifyrir %}thm_x13 {% endif %}{% if ti.skropari %}thm_skropari {% endif %}{% if ti.uppreisnarseggur %}thm_uppreisnarseggur {% endif %}'
+    <div class='thm thm_fl_{{ ti.flokksstafur }} {% if ti.thm.iframbodifyrir %}thm_x13 {% endif %}{% if ti.skropari %}thm_skropari {% endif %}{% if ti.uppreisnarseggur %}thm_uppreisnarseggur {% endif %}{% if ti.velmenni %}thm_velmenni {% endif %}'
          id='thm_{{ ti.thm.stafir }}'>
       <p class='info'>{% if not ti.flokksstafur == '_' %}
         <span class='flokkur'>{{ ti.flokksstafur }}</span>{% endif %}

@@ -80,7 +80,7 @@ class Thingmadur(models.Model):
     return '%.1f' % (10.0 - (10.0 * self.skropadi() / (self.vidvera() or 1)))
 
   def hlydni(self):
-    if self.flokkur() == '_':
+    if self.flokkur().stafur == '_':
       return '10.0'
     return '%.1f' % (10.0 - (10.0 * self.uppreisnir() / (self.vidvera() or 1)))
 
