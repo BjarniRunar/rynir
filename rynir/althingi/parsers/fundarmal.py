@@ -33,7 +33,7 @@ class ScraperParserFundarmal(ScraperParserHTML):
         if l and f:
           lth, fnr = l, f
       if ('ferill.pl' in href) and href.startswith('/'):
-        ferill = urlbase + href
+        ferill = urlbase + href[1:]
 
     for para in soup.fetch('p'):
       brtt = para.a
