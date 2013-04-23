@@ -133,8 +133,9 @@ class Kosning(models.Model):
   def atkvaedi_satuhja(self): return self.atkvaedi('S')
   def atkvaedi_fjarverandi(self): return self.atkvaedi('F')
   def atkvaedi_uppreisn(self):
-    atkv = list(Atkvaedi.objects.filter(kosning=self, uppreisn=True
-                                        ).exclude(atkvaedi='F'))
+    atkv = [a for a in list(Atkvaedi.objects.filter(kosning=self, uppreisn=True
+                                                    ).exclude(atkvaedi='F'))
+                    if a.thingmadur.flokkur().stafur != '_']
     atkv.sort(key=lambda a: a.thingmadur.flokkur().stafur + a.thingmadur.nafn,
               cmp=locale.strcoll)
     return atkv
