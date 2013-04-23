@@ -30,7 +30,7 @@ class ScraperParser:
     return urls.keys()
 
   def scrape(self, url, ignore_cache=False):
-    print 'Scraping: %s' % url
+    #print 'Scraping: %s' % url
     cache_id = hashlib.md5(url).hexdigest()[:20]
     cache_fn = os.path.join(settings.RYNIR_SCRAPE_PATH, cache_id)
     try:

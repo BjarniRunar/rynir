@@ -62,7 +62,7 @@
   .thm_fl_O {background: #eef;}
   .thm p {padding: 0;}
   .thm img {height: 100%; max-width: 25%; float: left; margin: 0 4px 0 0;}
-  .thm .flokkur {font-size: 0.85em; font-weight: bold; float: right; margin: 0 0 4px 4px;}
+  .thm .flokkur, .thm .x13 {font-size: 0.85em; font-weight: bold; float: right; margin: 0 0 4px 4px;}
   .thm .flokkur:before {content: "(";}
   .thm .flokkur:after {content: ")";}
   .thm .bio {position: absolute; bottom: 0; right: 4px;}
@@ -95,8 +95,10 @@
 {% for ti in thingmenn %}
     <div class='thm thm_fl_{{ ti.flokksstafur }} {% if ti.thm.iframbodifyrir %}thm_x13 {% endif %}{% if ti.skropari %}thm_skropari {% endif %}{% if ti.uppreisnarseggur %}thm_uppreisnarseggur {% endif %}{% if ti.velmenni %}thm_velmenni {% endif %}'
          id='thm_{{ ti.thm.stafir }}'>
-      <p class='info'>{% if not ti.flokksstafur == '_' %}
-        <span class='flokkur'>{{ ti.flokksstafur }}</span>{% endif %}
+      <p class='info'>{% if ti.thm.iframbodifyrir %}
+        <span class='x13' title='{{ ti.thm.iframbodifyrir }}'>{{ ti.thm.frambodsstafir }}</span>
+      {% else %}{% if not ti.flokksstafur == '_' %}
+        <span class='flokkur'>{{ ti.flokksstafur }}</span>{% endif %}{% endif %}
         <a href='/thingmenn/{{ ti.thm.althingi_id }}/'>
           <img src='{{ ti.thm.url_mynd }}' alt='' onError='imgError(this);'>
           <span class='nafn'>{{ ti.thm.nafn }}</span>

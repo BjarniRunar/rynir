@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
+
+import datetime
 import threading
 import time
+import traceback
 from django.http import HttpResponse, Http404
 
 import settings
@@ -47,9 +51,45 @@ class BootStrapper(threading.Thread):
         fl.stafur = stafur
         fl.save()
 
+    # Manually add missing parliamentarians
+    for althingi_id, info in settings.RYNIR_THINGMENN.iteritems():
+      existing = Thingmadur.objects.filter(althingi_id=althingi_id)
+      if existing:
+        thm = existing[0]
+      else:
+        thm = Thingmadur()
+
+      thm.althingi_id = althingi_id
+      thm.stafir      = info['stafir']
+      thm.varamadur   = info['varamadur']
+      thm.nafn        = info['nafn']
+      thm.url_vefs    = info['url_vefs']
+      thm.url_mynd    = info['url_mynd']
+      thm.save()
+
+      flokkur = Flokkur.objects.filter(stafur=info['flokkur'])[0]
+      Flokksseta(flokkur=flokkur, thingmadur=thm,
+                 upphaf=datetime.datetime.now()).save()
+      print 'Manually added %s to %s' % (thm.nafn, flokkur.nafn)
+
+    # Manually mark who is running in next elections
+    for line in settings.FRAMBOD_X13_LISTI:
+      try:
+        xfl, kjordaemi, saeti, nafn = line[:4]
+        texti = u'%s - #%s í %s' % (xfl, saeti, kjordaemi)
+        thm = Thingmadur.objects.filter(nafn=nafn)[0]
+        thm.iframbodifyrir = texti
+        thm.save()
+        print u'%s is running for %s' % (thm.nafn, texti)
+      except IndexError:
+        pass
+      except ValueError:
+        traceback.print_exc()
+        print 'Bad line: %s' % line
+
     # FIXME: This is hard-coding the values for the 138-141st term.
     if self.testing:
-      for i in range(100, 115):
+      for i in range(105, 115):
         mp.scrape_and_parse(('http://www.althingi.is/altext/%d/f%3.3d.sgml'
                              ) % (141, i))
     else:

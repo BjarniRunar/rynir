@@ -23,6 +23,12 @@ class Thingmadur(models.Model):
   cached_skropadi = models.IntegerField(null=True)
   cached_uppreisnir = models.IntegerField(null=True)
 
+  def frambodsstafir(self):
+    words = self.iframbodifyrir.split()
+    if words:
+      return words[0]
+    return ''
+
   def kaus(self, atkv):
     return Atkvaedi.objects.filter(thingmadur=self, atkvaedi=atkv
                                    ).order_by('-kosning__umraeda__umfang')

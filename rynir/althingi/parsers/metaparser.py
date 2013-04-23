@@ -30,7 +30,7 @@ class MetaParser(ScraperParser):
     rv = None
     for rxp, cls in SCRAPER_PARSERS.iteritems():
       if rxp.match(url):
-        print 'Routing %s to %s' % (url, cls)
+        #print 'Routing %s to %s' % (url, cls)
         sp = cls()
         sp.scrape_and_parse = self.scrape_and_parse
         try:

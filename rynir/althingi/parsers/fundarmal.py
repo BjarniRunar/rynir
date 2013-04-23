@@ -74,12 +74,6 @@ class ScraperParserFundarmal(ScraperParserHTML):
           for u in updating:
             u.delete()
 
-        print 'Umraeda: %s / %s / %s' % (fnr, lth, uid)
-        print 'J: %s' % ja
-        print 'N: %s' % nei
-        print 'F: %s' % fj
-        print 'S: %s' % sh
-
         nu = Umraeda(uid=uid,
                      fundur=Fundur.objects.filter(fnr=fnr, lth=lth)[0],
                      umfang=len(data),
@@ -125,6 +119,7 @@ class ScraperParserFundarmal(ScraperParserHTML):
            info['thm'].drop_caches()
 
         nk.sparks(refresh=True)
+        print 'Umraeda: %s / %s / %s' % (fnr, lth, uid)
 
     return True
 

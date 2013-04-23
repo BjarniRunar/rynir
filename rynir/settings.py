@@ -1,8 +1,10 @@
 # Rynir project settings
+# -*- coding: utf-8 -*-
 
 import locale
 locale.setlocale(locale.LC_ALL, '')
 
+from frambod_x13 import FRAMBOD_X13_LISTI
 try:
     from local_settings import *
 except ImportError:
@@ -24,13 +26,27 @@ ADMINS = (
 MANAGERS = ADMINS
 
 RYNIR_DIR = ROOT_DIR + '/rynir'
+
 RYNIR_BOKSTAFIR = {
   'Ut': '_',
   'Vi': 'V',
   'Sa': 'S',
   'Sj': 'D',
   'Fr': 'B',
-  'Hr': 'O'
+  'Hr': 'O',
+  'Pi': 'Þ',
+  'Bj': 'A'
+}
+# Reddingar, thvi skraparinn finnur ekki alveg alla thingmenn eins og er
+RYNIR_THINGMENN = {
+  '727': {
+    'stafir': 'GLG',
+    'varamadur': False,
+    'nafn': u'Guðfríður Lilja Grétarsdóttir',
+    'url_mynd': 'http://www.althingi.is/myndir/thingmenn-cache/727/727-220.jpg',
+    'url_vefs': 'http://www.althingi.is/cv.php4?nfaerslunr=727',
+    'flokkur': 'V'
+  }
 }
 
 DATABASES = {

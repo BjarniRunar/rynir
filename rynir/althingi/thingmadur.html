@@ -14,7 +14,9 @@
   #thingmadur {width: 700px; margin: 0 auto;}
   .althingi {float: right; width: 200px; text-align: center;}
   .althingi img {max-width: 100%; margin-left: 10px;}
+  .x13 {font-weight: bold; margin: -20px 0 0 25px;}
   table {margin: 0 0 0 25px;}
+  tt {font-size: 0.85em;}
   th, td {text-align: left; padding-right: 10px;}
   .kaus_uppreisn p {font-style: italic; font-size: 0.85em;
                     margin: -15px 25px 10px 25px;}
@@ -28,6 +30,9 @@
       Æviágrip á Alþingi.is
     </a>
     <h3 class='nafn'>{{ thingmadur.nafn }}</h3>
+    {% if thingmadur.iframbodifyrir %}<p class='x13'>
+      {{ thingmadur.iframbodifyrir }}
+    </p>{% endif %}
     <h4 class='flokkur'><a href='/thingmenn/#thmfl_{{ thingmadur.flokkur.stafur }}'>{{ thingmadur.flokkur.nafn }}</a>{% if thingmadur.varamadur %}
                         <small>(varamaður)</small>{% endif %}</h4>
     <table>{% if not thingmadur.flokkur.stafur == '_' %}
@@ -46,23 +51,23 @@
          samstaða er, teljast allir vera í uppreisn.</p>
       <ul>{% for a in thingmadur.kaus_uppreisn|slice:":10" %}
         <li><i>{{ a.kosning.timi|date:"Y-m-d" }}:</i>
-            <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill }}</a> ({{ a.atkvaedi }})</li>
+            <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill }}</a> <tt>({{ a.atkvaedi }})</tt></li>
       {% endfor %}</ul>
     </div>{% endif %}
     <div class='kaus kaus_ja'>
-      <h5>Kaus já (J)</h2><ul>{% for a in thingmadur.kaus_ja|slice:":10" %}
+      <h5>Kaus já <tt>(J)</tt></h2><ul>{% for a in thingmadur.kaus_ja|slice:":10" %}
         <li><i>{{ a.kosning.timi|date:"Y-m-d" }}:</i>
             <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill }}</a></li>
       {% endfor %}</ul>
     </div>
     <div class='kaus kaus_nei'>
-      <h5>Kaus nei (N)</h2><ul>{% for a in thingmadur.kaus_nei|slice:":10" %}
+      <h5>Kaus nei <tt>(N)</tt></h2><ul>{% for a in thingmadur.kaus_nei|slice:":10" %}
         <li><i>{{ a.kosning.timi|date:"Y-m-d" }}:</i>
             <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill }}</a></li>
       {% endfor %}</ul>
     </div>
     <div class='kaus kaus_ekki'>
-      <h5>Sat hjá (S)</h2><ul>{% for a in thingmadur.kaus_ekki|slice:":10" %}
+      <h5>Sat hjá <tt>(S)</tt></h2><ul>{% for a in thingmadur.kaus_ekki|slice:":10" %}
         <li><i>{{ a.kosning.timi|date:"Y-m-d" }}:</i>
             <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill }}</a></li>
       {% endfor %}</ul>
