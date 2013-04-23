@@ -55,8 +55,8 @@ def thingmenn(request):
   for ti in [t for t in thingmenn if not t['thm'].varamadur][:12]:
     ti['uppreisnarseggur'] = True
 
-  thingmenn.sort(key=lambda t: -(float(t['thm'].hlydni()) +
-                                 float(t['thm'].maeting())))
+  thingmenn.sort(key=lambda t: -(3*float(t['thm'].hlydni()) +
+                                 2*float(t['thm'].maeting())))
   for ti in [t for t in thingmenn if not t['thm'].varamadur and
                                      not t['flokksstafur'] == '_'][:12]:
     ti['velmenni'] = True
