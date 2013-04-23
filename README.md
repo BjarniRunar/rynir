@@ -10,6 +10,9 @@ með því hvernig kjörnir fulltrúar þeirra haga atkvæðum sínum á Alþing
 útgáfurnar sem hægt er að setja inn með `apt-get` á gamalli Debian
 vél.
 
+Fyrst þarf að búa til skrá sem heitir `rynir/local_settings.py`, en
+það er ágætis sýnishorn að finna í `rynir/local_settings.py-example`.
+
 Svo þarf að gera svona:
 
     $ manage.py syncdb
@@ -19,8 +22,7 @@ Svo þarf að gera svona:
     $ curl http://localhost:8000/scraper/bootstrap/testing
 
 Ef þú vilt að græjan lesi allt sem gerðist á síðasta kjörtímabili, í
-staðinn fyrir að lesa bara inn síðustu fundina (sem er nóg til að prófa og
-fikta), skiparðu svona í staðinn:
+staðinn fyrir að lesa bara inn síðustu fundina skiparðu svona í staðinn:
 
     $ curl http://localhost:8000/scraper/bootstrap
 
