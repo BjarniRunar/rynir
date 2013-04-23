@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     # Scraper
     (r'^scrape/(?P<proto>https?)(?::/)?/(?P<domain>[^/]+)/(?P<path>.*)$',
                                                   'althingi.scraper.scrape'),
-    (r'^scrape/bootstrap$',                       'althingi.scraper.bootstrap'),
+    (r'^scrape/bootstrap(?P<testing>/testing)?$', 'althingi.scraper.bootstrap'),
 
     # The admin
     (r'^admin/', include(admin.site.urls)),

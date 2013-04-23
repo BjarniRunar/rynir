@@ -32,6 +32,10 @@ def scrape(request, proto=None, domain=None, path=None):
 
 
 class BootStrapper(threading.Thread):
+  def __init__(self, testing=False):
+    threading.Thread.__init__(self)
+    self.testing = testing
+
   def run(self):
     mp = metaparser.MetaParser()
     mp.bootstrap()
@@ -44,16 +48,19 @@ class BootStrapper(threading.Thread):
         fl.save()
 
     # FIXME: This is hard-coding the values for the 138-141st term.
-    for t in (141, 140, 139, 138):
-      for i in range(1, 169+1):
+    if self.testing:
+      for i in range(100, 115):
         mp.scrape_and_parse(('http://www.althingi.is/altext/%d/f%3.3d.sgml'
-                             ) % (t, i))
-        #time.sleep(2)
+                             ) % (141, i))
+    else:
+      for t in (141, 140, 139, 138):
+        for i in range(1, 169+1):
+          mp.scrape_and_parse(('http://www.althingi.is/altext/%d/f%3.3d.sgml'
+                               ) % (t, i))
 
 
-
-def bootstrap(request):
-  BootStrapper().start()
+def bootstrap(request, testing=False):
+  BootStrapper(testing=testing).start()
   return HttpResponse('OK, started background bootstrap thread.\n'
                       'This may take quite a while.')
 
