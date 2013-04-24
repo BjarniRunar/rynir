@@ -111,22 +111,22 @@ XL;Norðvesturkjördæmi;13;Ólafur Þór Benediktsson;020353-5629;hafnarvörðu
 XL;Norðvesturkjördæmi;14;Rannveig Höskuldsdóttir;020950-6179;verkakona;Hlíðarvegi 53;Kópavogi
 XL;Norðvesturkjördæmi;15;Lísbet Harðardóttir Ólafardóttir;100885-2479;húsmálari og ritstjóri;Seljalandsvegi 6;Ísafjarðarbæ
 XL;Norðvesturkjördæmi;16;Þórður Sævar Jónsson;240834-2279;eldri borgari;Hrannargötu 2;Ísafjarðarbæ
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;1;Ylfa Mist Helgadóttir;310374-4319;sjúkraliðanemi og söngkona;Vitastíg 12;Bolungarvík
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;2;Steinunn Ýr Einarsdóttir;081182-5159;húsmóðir og nemi;Austurvegi 13;Ísafjarðarbæ
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;3;Sóley Veturliðadóttir;050370-3999;þroskaþjálfi og sérkennslustjóri;Urðarvegi 49;Ísafjarðarbæ
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;4;Haukur Már Sigurðsson;141257-7069;verslunarmaður;Brunnum 18;Vesturbyggð
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;5;Svanur Ingi Björnsson;050192-2969;kjötvinnslumaður;Melabraut 11;Blönduósbæ
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;6;Guðmundur Guðmundsson;260450-2479;skipaskoðunarmaður;Neðri-Lá;Grundarfjarðarbæ
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;7;Björgúlfur Egill Pálsson;091194-3179;nemi;Vitastíg 12;Bolungarvík
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;8;Þorsteinn J. Tómasson;281153-7499;framreiðslumeistari og bifreiðastjóri;Seljalandsvegi 52;Ísafjarðarbæ
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;9;Brynjar Gunnarsson;011160-5819;sjómaður;Brekkugötu 34;Ísafjarðarbæ
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;10;Ingunn Ósk Sturludóttir;231259-3419;tónlistarkennari og söngkona;Neðstakaupstað;Ísafjarðarbæ
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;11;Guðrún Guðný Long;131267-3639;hársnyrtir og öryrki;Hlíðargötu 1;Súðavíkurhreppi
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;12;Dagný Þrastardóttir;190963-4469;húsgagnasmiður;Aðalstræti 16;Ísafjarðarbæ
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;13;Gunnar Jónsson;100888-2979;myndlistarmaður;Seljalandsvegi 6;Ísafjarðarbæ
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;14;Guðný Sóley Kristinsdóttir;200467-3889;snyrtifræðingur;Miðtúni 35;Ísafjarðarbæ
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;15;Magnús Kristján Hávarðarson;051162-2859;tölvu- og kerfisfræðingur;Miðtúni 35;Ísafjarðarbæ
-XLandsbyggðarflokkurinn;Norðvesturkjördæmi;16;Guðlaugur Jónsson;010270-3249;vélstjóri;Túngötu 31;Tálknafjarðarhreppi
+XM;Norðvesturkjördæmi;1;Ylfa Mist Helgadóttir;310374-4319;sjúkraliðanemi og söngkona;Vitastíg 12;Bolungarvík
+XM;Norðvesturkjördæmi;2;Steinunn Ýr Einarsdóttir;081182-5159;húsmóðir og nemi;Austurvegi 13;Ísafjarðarbæ
+XM;Norðvesturkjördæmi;3;Sóley Veturliðadóttir;050370-3999;þroskaþjálfi og sérkennslustjóri;Urðarvegi 49;Ísafjarðarbæ
+XM;Norðvesturkjördæmi;4;Haukur Már Sigurðsson;141257-7069;verslunarmaður;Brunnum 18;Vesturbyggð
+XM;Norðvesturkjördæmi;5;Svanur Ingi Björnsson;050192-2969;kjötvinnslumaður;Melabraut 11;Blönduósbæ
+XM;Norðvesturkjördæmi;6;Guðmundur Guðmundsson;260450-2479;skipaskoðunarmaður;Neðri-Lá;Grundarfjarðarbæ
+XM;Norðvesturkjördæmi;7;Björgúlfur Egill Pálsson;091194-3179;nemi;Vitastíg 12;Bolungarvík
+XM;Norðvesturkjördæmi;8;Þorsteinn J. Tómasson;281153-7499;framreiðslumeistari og bifreiðastjóri;Seljalandsvegi 52;Ísafjarðarbæ
+XM;Norðvesturkjördæmi;9;Brynjar Gunnarsson;011160-5819;sjómaður;Brekkugötu 34;Ísafjarðarbæ
+XM;Norðvesturkjördæmi;10;Ingunn Ósk Sturludóttir;231259-3419;tónlistarkennari og söngkona;Neðstakaupstað;Ísafjarðarbæ
+XM;Norðvesturkjördæmi;11;Guðrún Guðný Long;131267-3639;hársnyrtir og öryrki;Hlíðargötu 1;Súðavíkurhreppi
+XM;Norðvesturkjördæmi;12;Dagný Þrastardóttir;190963-4469;húsgagnasmiður;Aðalstræti 16;Ísafjarðarbæ
+XM;Norðvesturkjördæmi;13;Gunnar Jónsson;100888-2979;myndlistarmaður;Seljalandsvegi 6;Ísafjarðarbæ
+XM;Norðvesturkjördæmi;14;Guðný Sóley Kristinsdóttir;200467-3889;snyrtifræðingur;Miðtúni 35;Ísafjarðarbæ
+XM;Norðvesturkjördæmi;15;Magnús Kristján Hávarðarson;051162-2859;tölvu- og kerfisfræðingur;Miðtúni 35;Ísafjarðarbæ
+XM;Norðvesturkjördæmi;16;Guðlaugur Jónsson;010270-3249;vélstjóri;Túngötu 31;Tálknafjarðarhreppi
 XS;Norðvesturkjördæmi;1;Guðbjartur Hannesson;030650-3609;ráðherra;Dalsflöt 8;Akranesi
 XS;Norðvesturkjördæmi;2;Ólína Þorvarðardóttir;080958-2859;alþingismaður;Miðtúni 16;Ísafjarðarbæ
 XS;Norðvesturkjördæmi;3;Hörður Ríkharðsson;291262-5899;kennari;Brekkubyggð 4;Blönduósbæ
@@ -451,7 +451,7 @@ XB;Suðurkjördæmi;17;Ásthildur Ýr Gísladóttir;280988-2279;vaktstjóri;Hei�
 XB;Suðurkjördæmi;18;Reynir Arnarson;010456-7899;bæjarfulltrúi;Vesturbraut 21;Hafnarfirði
 XB;Suðurkjördæmi;19;Þorvaldur Guðmundsson;130550-2319;framhaldsskólakennari;Engjavegi 89;Svfél. Árborg
 XB;Suðurkjördæmi;20;Guðmundur Elíasson;240349-4269;stöðvarstjóri;Pétursey 2;Mýrdalshreppi
-XD;Suðurkjördæmi;1;Ragnheiður Elín Árnadóttir;300967-5829;alþingismaður;Heiðarbrún 13;Reykjanesbæ
+XD;Suðurkjördæmi;1;Ragnheiður E. Árnadóttir;300967-5829;alþingismaður;Heiðarbrún 13;Reykjanesbæ
 XD;Suðurkjördæmi;2;Unnur Brá Konráðsdóttir;060474-5839;alþingismaður;Gilsbakka 4;Rangárþingi eystra
 XD;Suðurkjördæmi;3;Ásmundur Friðriksson;210156-4459;fyrrv. bæjarstjóri;Ósbraut 7;Svfél. Garði
 XD;Suðurkjördæmi;4;Vilhjálmur Árnason;291083-4989;lögreglumaður;Selsvöllum 16;Grindavík
@@ -708,7 +708,7 @@ XD;Suðvesturkjördæmi;22;Jónas Þórir Þórisson;280356-2559;tónlistarmaðu
 XD;Suðvesturkjördæmi;23;Halla Halldórsdóttir;250348-2669;ljósmóðir;Austurgerði 5;Kópavogi
 XD;Suðvesturkjördæmi;24;Gullveig T. Sæmundsdóttir;271045-8169;fyrrv. ritstjóri;Sunnuflöt 34;Garðabæ
 XD;Suðvesturkjördæmi;25;Gunnar Sigurjónsson;241260-2679;sóknarprestur;Hrauntungu 63;Kópavogi
-XD;Suðvesturkjördæmi;26;Þorgerður Katrín Gunnarsdóttir;041065-3039;alþingismaður;Mávahrauni 7;Hafnarfirði
+XD;Suðvesturkjördæmi;26;Þorgerður K. Gunnarsdóttir;041065-3039;alþingismaður;Mávahrauni 7;Hafnarfirði
 XG;Suðvesturkjördæmi;1;Sigurjón Haraldsson;261257-5809;viðskiptafræðingur;Danmörku
 XG;Suðvesturkjördæmi;2;Týr Þórarinsson;190758-3119;kvikmyndagerðarmaður;Háteigsvegi 14;Reykjavík
 XG;Suðvesturkjördæmi;3;Ástþór Óli Halldórsson;170582-5869;afgreiðslustjóri;Bæjarholti 5;Hafnarfirði
@@ -964,7 +964,7 @@ XB;Reykjavíkurkjördæmi suður;22;Tómas Árnason;210723-7499;fyrrv. seðlaban
 XD;Reykjavíkurkjördæmi suður;1;Hanna Birna Kristjánsdóttir;121066-5139;borgarfulltrúi;Hellulandi 2;Reykjavík
 XD;Reykjavíkurkjördæmi suður;2;Pétur H. Blöndal;240644-2319;alþingismaður;Kringlunni 19;Reykjavík
 XD;Reykjavíkurkjördæmi suður;3;Guðlaugur Þór Þórðarson;191267-5759;alþingismaður;Logafold 48;Reykjavík
-XD;Reykjavíkurkjördæmi suður;4;Sigríður Ásthildur Andersen;211171-3169;héraðsdómslögmaður;Hávallagötu 53;Reykjavík
+XD;Reykjavíkurkjördæmi suður;4;Sigríður Á. Andersen;211171-3169;héraðsdómslögmaður;Hávallagötu 53;Reykjavík
 XD;Reykjavíkurkjördæmi suður;5;Áslaug María Friðriksdóttir;200769-5549;framkvæmdastjóri og varaborgarfulltrúi;Skólavörðustíg 29;Reykjavík
 XD;Reykjavíkurkjördæmi suður;6;Teitur Björn Einarsson;010480-3379;héraðsdómslögmaður;Birkimel 6;Reykjavík
 XD;Reykjavíkurkjördæmi suður;7;Þórey Vilhjálmsdóttir;180872-5909;viðskiptafræðingur;Sunnuvegi 33;Reykjavík
@@ -1158,7 +1158,7 @@ XS;Reykjavíkurkjördæmi suður;18;Natan Kolbeinsson;240693-2759;nemi;Safamýri
 XS;Reykjavíkurkjördæmi suður;19;Falasteen Abu Libdeh;021178-2099;sérfræðingur;Tunguseli 10;Reykjavík
 XS;Reykjavíkurkjördæmi suður;20;Gunnar Þórðarson;060454-4349;húsasmíðameistari;Asparfelli 4;Reykjavík
 XS;Reykjavíkurkjördæmi suður;21;Hrannar Björn Arnarsson;160967-3749;aðstoðarmaður forsætisráðherra;Sæviðarsundi 90;Reykjavík
-XS;Reykjavíkurkjördæmi suður;22;Ásta Ragnheiður Jóhannesdóttir;161049-3369;forseti Alþingis;Garðastræti 43;Reykjavík
+XS;Reykjavíkurkjördæmi suður;22;Ásta R. Jóhannesdóttir;161049-3369;forseti Alþingis;Garðastræti 43;Reykjavík
 XT;Reykjavíkurkjördæmi suður;1;Þórður Björn Sigurðsson;291276-3429;BA í mannfræði;Rauðamýri 1;Mosfellsbæ
 XT;Reykjavíkurkjördæmi suður;2;Helga Þórðardóttir;281257-3239;kennari;Seiðakvísl 7;Reykjavík
 XT;Reykjavíkurkjördæmi suður;3;Rannveig Óskarsdóttir;171279-5779;meistaranemi í trúarbragðafræðum;Kleppsvegi 48;Reykjavík
