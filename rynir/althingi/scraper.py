@@ -36,9 +36,10 @@ def scrape(request, proto=None, domain=None, path=None):
 
 
 class BootStrapper(threading.Thread):
-  def __init__(self, testing=False):
+  def __init__(self, testing=False, fundir=None):
     threading.Thread.__init__(self)
     self.testing = testing
+    self.fundir = fundir and fundir.split(',')
 
   def run(self):
     mp = metaparser.MetaParser()
@@ -93,14 +94,15 @@ class BootStrapper(threading.Thread):
         mp.scrape_and_parse(('http://www.althingi.is/altext/%d/f%3.3d.sgml'
                              ) % (141, i))
     else:
-      for t in (138, 139, 140, 141):
+      for t in self.fundir or (138, 139, 140, 141):
         for i in range(1, 169+1):
-          mp.scrape_and_parse(('http://www.althingi.is/altext/%d/f%3.3d.sgml'
+          mp = metaparser.MetaParser()
+          mp.scrape_and_parse(('http://www.althingi.is/altext/%s/f%3.3d.sgml'
                                ) % (t, i))
 
 
-def bootstrap(request, testing=False):
-  BootStrapper(testing=testing).start()
+def bootstrap(request, testing=False, fundir=None):
+  BootStrapper(testing=testing, fundir=fundir).start()
   return HttpResponse('OK, started background bootstrap thread.\n'
-                      'This may take quite a while.')
+                      'This may take quite a while.\n')
 
