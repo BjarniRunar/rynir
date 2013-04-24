@@ -93,7 +93,7 @@ class BootStrapper(threading.Thread):
         mp.scrape_and_parse(('http://www.althingi.is/altext/%d/f%3.3d.sgml'
                              ) % (141, i))
     else:
-      for t in (141, 140, 139, 138):
+      for t in (138, 139, 140, 141):
         for i in range(1, 169+1):
           mp.scrape_and_parse(('http://www.althingi.is/altext/%d/f%3.3d.sgml'
                                ) % (t, i))
