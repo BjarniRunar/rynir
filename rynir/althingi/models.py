@@ -29,6 +29,15 @@ class Thingmadur(models.Model):
       return words[0]
     return ''
 
+  def frambodssaeti(self):
+    if not self.iframbodifyrir:
+      return 0
+    return int(self.iframbodifyrir.split()[2][1:])
+
+  def toppfimm(self):
+    saeti = self.frambodssaeti()
+    return (saeti > 0) and (saeti <= 5)
+
   def kaus(self, atkv):
     return Atkvaedi.objects.filter(thingmadur=self, atkvaedi=atkv
                                    ).order_by('-kosning__umraeda__umfang')
@@ -89,7 +98,7 @@ class Thingmadur(models.Model):
   def hlydni(self):
     if self.flokkur().stafur == '_':
       return '10.0'
-    return '%.1f' % (10.0 - (10.0 * self.uppreisnir() / (self.vidvera() or 1)))
+    return '%.1f' % (10.0 - min(10, 0.05 * self.uppreisnir()))
 
 class Flokksseta(models.Model):
   flokkur = models.ForeignKey(Flokkur)

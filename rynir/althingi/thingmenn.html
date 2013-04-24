@@ -93,9 +93,9 @@
   </div><hr>
   <div id='thingmenn'>
 {% for ti in thingmenn %}
-    <div class='thm thm_fl_{{ ti.flokksstafur }} {% if ti.thm.iframbodifyrir %}thm_x13 {% endif %}{% if ti.skropari %}thm_skropari {% endif %}{% if ti.uppreisnarseggur %}thm_uppreisnarseggur {% endif %}{% if ti.velmenni %}thm_velmenni {% endif %}'
+    <div class='thm thm_fl_{{ ti.flokksstafur }} {% if ti.thm.toppfimm %}thm_x13 {% endif %}{% if ti.skropari %}thm_skropari {% endif %}{% if ti.uppreisnarseggur %}thm_uppreisnarseggur {% endif %}{% if ti.velmenni %}thm_velmenni {% endif %}'
          id='thm_{{ ti.thm.stafir }}'>
-      <p class='info'>{% if ti.thm.iframbodifyrir %}
+      <p class='info'>{% if ti.thm.toppfimm %}
         <span class='x13' title='{{ ti.thm.iframbodifyrir }}'>{{ ti.thm.frambodsstafir }}</span>
       {% else %}{% if not ti.flokksstafur == '_' %}
         <span class='flokkur'>{{ ti.flokksstafur }}</span>{% endif %}{% endif %}
