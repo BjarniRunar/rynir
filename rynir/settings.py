@@ -167,6 +167,14 @@ RYNIR_THINGMENN = {
     'url_vefs': 'http://www.althingi.is/altext/cv.php4?nfaerslunr=1151',
     'flokkur': 'B',
   },
+  '1136': {
+    'stafir': 'BaldÞ',
+    'varamadur': True,
+    'nafn': u'http://www.althingi.is/altext/cv.php4?nfaerslunr=1136',
+    'url_mynd': 'http://www.althingi.is/myndir/thingmenn-cache/1136/1136-220.jpg',
+    'url_vefs': 'http://www.althingi.is/altext/cv.php4?nfaerslunr=1136',
+    'flokkur': 'S',
+  },
 }
 
 DATABASES = {
