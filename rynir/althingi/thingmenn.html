@@ -11,11 +11,10 @@
   }
   function updateSelection() {
     var selection = window.location.hash;
-    $('.sel').css('font-weight', 'normal')
-             .css('text-decoration', 'none').each(function(index, elem) {
+    $('.sel').css('font-weight', 'normal').each(function(index, elem) {
       var href = $(elem).attr('href')
       if (href == selection || href == '#'+selection) {
-        $(elem).css('font-weight', 'bold').css('text-decoration', 'underline');
+        $(elem).css('font-weight', 'bold');
       }
     });
     if (selection.substring(1, 5) == "thm_") {
