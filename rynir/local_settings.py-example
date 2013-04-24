@@ -1,5 +1,7 @@
 ROOT_DIR = '/path/to/root'
 
+DEBUG = True
+
 # This is only an example file. You should copy it to 'local_settings.py'
 # (ignored by git) and edit the values accordingly.
 # If in development, a pure copy should suffice

@@ -16,7 +16,6 @@ except ImportError:
 
 # Django settings for rynir project.
 
-DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
