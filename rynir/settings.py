@@ -170,9 +170,17 @@ RYNIR_THINGMENN = {
   '1136': {
     'stafir': 'BaldÞ',
     'varamadur': True,
-    'nafn': u'http://www.althingi.is/altext/cv.php4?nfaerslunr=1136',
+    'nafn': u'Baldur Þórhallsson',
     'url_mynd': 'http://www.althingi.is/myndir/thingmenn-cache/1136/1136-220.jpg',
     'url_vefs': 'http://www.althingi.is/altext/cv.php4?nfaerslunr=1136',
+    'flokkur': 'S',
+  },
+  '686': {
+    'stafir': 'HöskÞ',
+    'varamadur': False,
+    'nafn': u'Höskuldur Þórhallsson',
+    'url_mynd': 'http://www.althingi.is/myndir/thingmenn-cache/686/686-220.jpg',
+    'url_vefs': 'http://www.althingi.is/altext/cv.php4?nfaerslunr=686',
     'flokkur': 'S',
   },
 }
