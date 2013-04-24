@@ -1,26 +1,58 @@
 <DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- encoding: utf-8 -->
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="is-IS">
 <head>
+  <meta charset="UTF-8">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="HandheldFriendly" content="true" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1" />
 
   <title>Alþingisrýnir - {% block title %}Gagnsæi í boði Pírata{% endblock %}</title>
 
-  <link rel="stylesheet" href="http://www.piratar.is/wp-content/themes/piratar/style.css">
+  <link rel="stylesheet"
+        href="http://www.piratar.is/wp-content/themes/piratar/style.css">
+  <link rel="shortcut icon"
+        href="http://www.piratar.is/wp-content/uploads/2013/03/favicon.ico">
+  <link rel="apple-touch-icon"
+        href="http://www.piratar.is/wp-content/themes/piratar/_/img/apple-touch-icon.png">
 {% block header %}{% endblock %}
 {% block stylesheets %}{% endblock %}
   <script src="http://www.piratar.is/wp-content/themes/piratar/_/js/modernizr-1.7.min.js"></script>
   <script language='javascript'>{% block javascript %}{% endblock %}</script>
   <style type="text/css">{% block css %}{% endblock %}
+    /* Deviations from the default piratar.is stylesheet begin... */
+    @font-face {
+      font-family: 'League Gothic';
+      src: url('/static/leaguegothic-regular-webfont.eot');
+      src: url('/static/leaguegothic-regular-webfont.eot?#iefix') format('embedded-opentype'),
+           url('/static/leaguegothic-regular-webfont.woff') format('woff'),
+           url('/static/leaguegothic-regular-webfont.ttf') format('truetype'),
+           url('/static/leaguegothic-regular-webfont.svg#league_gothicregular') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Liberation Serif';
+      src: url('/static/liberationserif-regular.eot');
+      src: url('/static/liberationserif-regular.eot?#iefix') format('embedded-opentype'),
+           url('/static/liberationserif-regular.woff') format('woff'),
+           url('/static/liberationserif-regular.ttf') format('truetype'),
+           url('/static/liberationserif-regular.svg#liberation_serifregular') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
     #header-content #site-heading a {
         background: url('/static/rynir-logo.png') left center no-repeat;
     }
+    #menu-header-menu {margin-right: 75px;}
+    #footer {border-top: 0;}
+    /* Deviations end. */
+
     .github {z-index: 5;}
-    .addthis_toolbox {position: absolute; right: 0; display: inline-block; height: 2em;
-                      margin: 4px 10px -2em 0; z-index: 10;}
+    .addthis_toolbox {position: absolute; right: 0; display: inline-block;
+                      height: 2em; margin: 4px 10px -2em 0; z-index: 10;}
   </style>
 </head>
 <body class="home blog">
@@ -36,7 +68,7 @@
           <li id="menu-item-01" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="/thingmenn/">Þingmenn</a></li>
           <li id="menu-item-02" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="/kosningar/">Kosningar</a></li>
           <li id="menu-item-03" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://www.piratar.is/um-althingisryninn/">Hvað?</a></li>
-          <li id="menu-item-04" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://www.piratar.is/">Píratar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+          <li id="menu-item-04" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="http://www.piratar.is/">Píratar</a></li>
         {% endblock %}</ul>
       </nav>                     
     </div>
@@ -51,19 +83,39 @@
    </div>
 <!-- AddThis Button END -->
 
-  <div id="page-wrap" class="clearfix"><!-- not needed? up to you: http://camendesign.com/code/developpeurs_sans_frontieres -->
+  <div id="page-wrap" class="clearfix">
     {% block content %}<div id="news">
       <h2 class="index-heading">Hello world</h2>
     </div>{% endblock %}
     <div id="sidebar">{% block sidebar %}{% endblock %}</div> 
   </div>
 
-  <footer id="footer" class="clearfix source-org vcard copyright"></footer>
+  <footer id="footer" class="clearfix source-org vcard copyright">
+    <div class="footer-wrap">
+      <div id="social-media-links">
+        <a href="https://www.facebook.com/Piratar.Island" target="_blank"
+           align="left"><img src="http://www.piratar.is/wp-content/uploads/2013/04/facebook-fjolu.png"></a>
+        <a href="https://twitter.com/PiratePartyIS" target="_blank"
+           align="left"><img src="http://www.piratar.is/wp-content/uploads/2013/04/twitter-fjolu.png"></a>
+        <a href="http://www.youtube.com/PiratePartyIceland" target="_blank"
+           align="left"><img src="http://www.piratar.is/wp-content/uploads/2013/04/youtube-fjolu.png"></a>
+      </div>
+      <p>
+        <a href="http://www.piratar.is/">Píratar</a>
+        &mdash; Sigtúni 59 kjallari, 105 Reykjavík
+        <br><span class="contact">
+          Netfang: <a href="mailto:piratar@piratar.is">piratar@piratar.is</a>
+          Sími: 844-6292
+        </span>
+      </p>
+    </div>
+  </footer>
 
   <a class='github' href="https://github.com/BjarniRunar/rynir">
     <img style="position: absolute; top: -15; right: -15; border: 0;"
          src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"
-         alt="Fork me on GitHub"></a>
+         alt="Fork me on GitHub">
+  </a>
 
 <!-- AddThis Button BEGIN -->
   <script type="text/javascript">
