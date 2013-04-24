@@ -159,6 +159,14 @@ RYNIR_THINGMENN = {
     'url_vefs': 'http://www.althingi.is/altext/cv.php4?nfaerslunr=1126',
     'flokkur': 'O',
   },
+  '1151': {
+    'stafir': 'GHV',
+    'varamadur': True,
+    'nafn': u'http://www.althingi.is/altext/cv.php4?nfaerslunr=1151',
+    'url_mynd': 'http://www.althingi.is/myndir/thingmenn-cache/1151/1151-220.jpg',
+    'url_vefs': 'http://www.althingi.is/altext/cv.php4?nfaerslunr=1151',
+    'flokkur': 'B',
+  },
 }
 
 DATABASES = {
