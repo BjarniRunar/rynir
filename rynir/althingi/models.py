@@ -18,7 +18,7 @@ class Thingmadur(models.Model):
   url_vefs = models.CharField(max_length=200)
   url_mynd = models.CharField(max_length=200)
   varamadur = models.BooleanField()
-  iframbodifyrir = models.CharField(max_length=1)
+  iframbodifyrir = models.CharField(max_length=200)
   cached_vidvera = models.IntegerField(null=True)
   cached_skropadi = models.IntegerField(null=True)
   cached_uppreisnir = models.IntegerField(null=True)
