@@ -48,17 +48,15 @@
     }
     #menu-header-menu {margin-right: 75px;}
     #footer {border-top: 0;}
+    #page-wrap {margin-top: 0px; position: relative;}
     /* Deviations end. */
 
     .github {z-index: 5;}
     .addthis_toolbox {position: absolute; right: 0; display: inline-block;
-                      height: 2em; margin: 4px 10px -2em 0; z-index: 10;}
+                      height: 2em; margin: 4px 10px 10px 0; z-index: 10;}
   </style>
 </head>
 <body class="home blog">
-
-  <div style='height: 90%; margin: 0; padding: 0;
-              float: right; width: 1px;'>&nbsp;</div>
 
   <header id="header">
     <div id="header-content">
@@ -74,19 +72,20 @@
     </div>
   </header>
 
+  <div id="page-wrap" class="clearfix">
 <!-- AddThis Button BEGIN -->
-  <div class="addthis_toolbox addthis_default_style ">
-    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    <a class="addthis_button_tweet"></a>
-    <a class="addthis_button_pinterest_pinit"></a>
-    <a class="addthis_counter addthis_pill_style"></a>
-   </div>
+    <div class="addthis_toolbox addthis_default_style ">
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+      <a class="addthis_button_tweet"></a>
+      <a class="addthis_button_pinterest_pinit"></a>
+      <a class="addthis_counter addthis_pill_style"></a>
+    </div><br><br>
 <!-- AddThis Button END -->
 
-  <div id="page-wrap" class="clearfix">
     {% block content %}<div id="news">
       <h2 class="index-heading">Hello world</h2>
     </div>{% endblock %}
+
     <div id="sidebar">{% block sidebar %}{% endblock %}</div> 
   </div>
 
