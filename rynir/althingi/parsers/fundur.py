@@ -42,7 +42,7 @@ class ScraperParserFundur(ScraperParserHTML):
     else:
       fn = Fundur()
 
-    fn.titill = title
+    fn.titill = unicode(title)
     fn.lth, fn.fnr = url_to_lth_fnr(url)
     fn.dags = '%4.4d-%2.2d-%2.2d %2.2d:%2.2d' % (year, mon, day, hour, minu)
     fn.save()
