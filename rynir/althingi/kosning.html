@@ -22,6 +22,7 @@
     return true;
   }
 {% endblock %}
+{% block title %}{{ kosning.timi|date:"Y-m-d" }} - {{ kosning.titill|truncatewords:7 }}{% endblock %}
 {% block content %}
   <div id=kosning>
     <h3>Þann {{ kosning.timi|date:"Y-m-d" }} var kosið um:</h3>
