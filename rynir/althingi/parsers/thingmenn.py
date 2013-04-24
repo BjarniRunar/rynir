@@ -34,18 +34,18 @@ class ScraperParserThingmenn(ScraperParserHTML):
       for td in tr.fetch('td', {}, False):
         for nobr in td.fetch('nobr', {}, False):
           for a in nobr.fetch('a'):
-            cv_url = a.get('href', '')
+            cv_url = unicode(a.get('href', ''))
             if cv_url.startswith('/altext/cv.php4'):
               try:
                 nr = cv_url.rsplit('=', 1)[1]
-                nafn = a.string
-                stafir = SKAMMSTOFUN_RE.search(unicode(nobr)).group(1)
+                nafn = unicode(a.string)
+                stafir = unicode(SKAMMSTOFUN_RE.search(unicode(nobr)).group(1))
               except:
                 traceback.print_exc()
           # <NOBR><abbr title="Framsoknarflokkur">Framsfl.</abbr>&nbsp;</NOBR>
           for abbr in nobr.fetch('abbr'):
-            flokkur = abbr.get('title')
-            flokkabbr = abbr.string[:-1]
+            flokkur = unicode(abbr.get('title'))
+            flokkabbr = unicode(abbr.string[:-1])
 
       if nr and nafn and stafir:
         existing = Thingmadur.objects.filter(stafir=stafir)

@@ -68,7 +68,7 @@ class ScraperParserFundarmal(ScraperParserHTML):
           elem = elem.next
 
         # FIXME: Create Umraeda/Kosning/Atkvaedi objects in DB
-        uid = UMRAEDA_ID_RE.search(url).group(1)
+        uid = UMRAEDA_ID_RE.search(unicode(url)).group(1)
         updating = Umraeda.objects.filter(uid=uid)
         if updating:
           for u in updating:
@@ -78,14 +78,14 @@ class ScraperParserFundarmal(ScraperParserHTML):
                      fundur=Fundur.objects.filter(fnr=fnr, lth=lth)[0],
                      umfang=len(data),
                      timi=dagstimi,
-                     efni=efni,
-                     url_ferill=ferill,
-                     titill=soup.h2.string)
+                     efni=unicode(efni),
+                     url_ferill=unicode(ferill),
+                     titill=unicode(soup.h2.string))
         nu.save()
 
         nk = Kosning(uid=uid,
                      umraeda=nu,
-                     titill=soup.h2.string,
+                     titill=unicode(soup.h2.string),
                      timi=dagstimi, # FIXME: wrong?
                      url_skjal='')
         nk.save()
