@@ -15,7 +15,11 @@
 {% block stylesheets %}{% endblock %}
   <script src="http://www.piratar.is/wp-content/themes/piratar/_/js/modernizr-1.7.min.js"></script>
   <script language='javascript'>{% block javascript %}{% endblock %}</script>
-  <style type="text/css">{% block css %}{% endblock %}</style>
+  <style type="text/css">{% block css %}{% endblock %}
+    #header-content #site-heading a {
+        background: url('/static/rynir-logo.png') left center no-repeat;
+    }
+  </style>
 </head>
 <body class="home blog">
 
