@@ -43,7 +43,7 @@
     } else if (selection == '#x13') {
       $('.thm').hide();
       $('.thm_x13').show();
-    } else if (selection == '#allir' || selection == '') {
+    } else if (selection == '#allir' || selection == '#' || selection == '') {
       $('.thm').show();
     }
   }
@@ -78,7 +78,7 @@
 {% block title %}Þingmenn og varaþingmenn{% endblock %}
 {% block content %}
   <div id='flokkar'>
-    <a class='sel fl' href='#allir'>Allir þingmenn</a
+    <a class='sel fl' href='#'>Allir þingmenn</a
    ><a class='sel fl' href='#x13'>Framboð 2013</a><br>
     <a class='sel fl' href='#skroparar'>Skróparar</a
    ><a class='sel fl' href='#velmenni'>Vélmenni</a
