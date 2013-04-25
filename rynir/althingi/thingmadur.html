@@ -36,7 +36,7 @@
       {{ thingmadur.iframbodifyrir }}, Alþingiskosningar 2013
     </p>{% endif %}
     <h4 class='flokkur'><a href='/thingmenn/#thmfl_{{ thingmadur.flokkur.stafur }}'>{{ thingmadur.flokkur.nafn }}</a>{% if thingmadur.varamadur %}
-                        <small>(varamaður)</small>{% endif %}</h4>
+                        &nbsp; <small>(varaþingmaður)</small>{% endif %}</h4>
     <table>{% if not thingmadur.flokkur.stafur == '_' %}
       <tr class='h'><th>Hlýðni:  </th><td>{{ thingmadur.hlydni }}{% if not thingmadur.hlydni == '10.0' %} &nbsp;
                                          ({{ thingmadur.uppreisnir }} uppreisnir){% endif %}</td></tr>{% endif %}
