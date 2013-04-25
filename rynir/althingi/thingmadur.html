@@ -93,7 +93,7 @@
             <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill|truncatewords:"9" }}</a></li>
       {% endfor %}</ul>
       {% if kaus_ekki|length < thingmadur.kaus_ekki.count %}
-      <div class='more'><a href="/thingmenn/{{ thingmadur.althingi_id }}/nei={{ thingmadur.kaus_ekki.count }}/#ekki"
+      <div class='more'><a href="/thingmenn/{{ thingmadur.althingi_id }}/ekki={{ thingmadur.kaus_ekki.count }}/#ekki"
         >meira ... ({{ thingmadur.kaus_ekki.count }})</a></div>
       {% endif %}
     </div>
