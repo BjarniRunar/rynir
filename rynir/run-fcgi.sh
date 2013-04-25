@@ -1,7 +1,12 @@
 #!/bin/bash
 BASEDIR=$(cd ..; pwd)
+
+# Cleanup and bookkeeping...
 kill $(cat $BASEDIR/data/rynir.pid)
 rm -f $BASEDIR/data/rynir.{pid,sock}
+(sleep 10; chmod go+w ../data/rynir.sock) &
+
+# Start the server
 exec ./rynir-www.py runfcgi \
   method=prefork \
   maxrequests=200 \
