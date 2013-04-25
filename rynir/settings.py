@@ -180,7 +180,7 @@ RYNIR_THINGMENN = {
     'nafn': u'Höskuldur Þórhallsson',
     'url_mynd': 'http://www.althingi.is/myndir/thingmenn-cache/686/686-220.jpg',
     'url_vefs': 'http://www.althingi.is/altext/cv.php4?nfaerslunr=686',
-    'flokkur': 'S',
+    'flokkur': 'B',
   },
 }
 
