@@ -23,7 +23,7 @@ def index(request):
   })
   return HttpResponse(t.render(c))
 
-@cache_control(must_revalidate=False, max_age=24*3600)
+@cache_control(must_revalidate=False, max_age=900)
 def thingmadur(request,
                althingi_id=None, uppreisn=None, ja=None, nei=None, ekki=None):
   try:
@@ -59,7 +59,7 @@ def thingmadur(request,
     'kaus_ekki': kaus_ekki,
   })))
 
-@cache_control(must_revalidate=False, max_age=24*3600)
+@cache_control(must_revalidate=False, max_age=900)
 def thingmenn(request):
   thingmenn = [{
     'thm': thm,
@@ -94,7 +94,7 @@ def thingmenn(request):
     'thingmenn': thingmenn
   })))
 
-@cache_control(must_revalidate=False, max_age=3600)
+@cache_control(must_revalidate=False, max_age=900)
 def kosning(request, kosning_uid=None):
   try:
     kosning = Kosning.objects.filter(uid=kosning_uid)[0]
@@ -107,7 +107,7 @@ def kosning(request, kosning_uid=None):
     'kosning': kosning
   })))
 
-@cache_control(must_revalidate=False, max_age=3600)
+@cache_control(must_revalidate=False, max_age=900)
 def kosningar(request, year=None):
   kosningar = Kosning.objects.order_by('-umraeda__umfang')
   data = {
