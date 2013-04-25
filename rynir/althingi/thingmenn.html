@@ -17,6 +17,7 @@
         $(elem).css('font-weight', 'bold');
       }
     });
+    $('.skyring').hide();
     if (selection.substring(1, 5) == "thm_") {
       var stafir = selection.substring(6, 20);
       $('.thm').each(function(index, elem) {
@@ -33,15 +34,19 @@
     } else if (selection == '#skroparar') {
       $('.thm').hide();
       $('.thm_skropari').show();
+      $('.skyring_skroparar').show();
     } else if (selection == '#velmenni') {
       $('.thm').hide();
       $('.thm_velmenni').show();
+      $('.skyring_velmenni').show();
     } else if (selection == '#uppreisnarseggir') {
       $('.thm').hide();
       $('.thm_uppreisnarseggur').show();
+      $('.skyring_uppreisnarseggir').show();
     } else if (selection == '#x13') {
       $('.thm').hide();
       $('.thm_x13').show();
+      $('.skyring_x13').show();
     } else if (selection == '#allir' || selection == '#' || selection == '') {
       $('.thm').show();
     }
@@ -52,7 +57,7 @@
   .thm {display: inline-block; width: 240px; height: 80px; padding: 0 4px 0 0;
         position: relative; font-size: 0.8em; margin: 5px; opacity: 0.80;
         border-right: 1px solid #ddd; border-bottom: 1px solid #bbb;
-        overflow: hidden; line-height: 1.4em;}
+        overflow: hidden; line-height: 1.4em; vertical-align: top;}
   .thm_fl_D {background: #bbf;}
   .thm_fl_S {background: #faa;}
   .thm_fl_V {background: #fc7;}
@@ -60,6 +65,8 @@
   .thm_fl_B {background: #cfc;}
   .thm_fl_O {background: #eef;}
   .thm p {padding: 0;}
+  .skyring {display: none; width:600px; margin: 5px auto;
+            font-weight: bold;}
   .thm img {height: 100%; max-width: 25%; float: left; margin: 0 4px 0 0;}
   .thm .flokkur, .thm .x13 {font-size: 0.85em; font-weight: bold;
                             float: right; margin: 0 0 4px 4px;}
@@ -94,7 +101,29 @@
    ><br><span class='thingflokkar'>{% for fl in flokkar %}
    <a class='sel fl' href='#thmfl_{{ fl.stafur }}'>{{ fl.nafn }}</a>{% endfor %}
    </span>
-  </div><hr>
+  </div>
+  <hr>
+  <div id='skyringar'>
+    <p class='skyring skyring_skroparar'>
+      Þetta eru þeir þingmenn sem oftast voru fjarverandi þegar greidd voru
+      atkvæði. Athugið að þingmenn neyðast stundum til að velja milli
+      nefndarstarfa eða alþjóðastarfs, og setu í þingsal. Vegna fjárskorts
+      fá þeir ekki alltaf að kalla til varamenn.
+    </p>
+    <p class='skyring skyring_velmenni'>
+      Vélmennin eru þingmenn sem fylgdu nær alltaf flokkslínunni og mættu vel.
+    </p>
+    <p class='skyring skyring_uppreisnarseggir'>
+      Uppreisnarseggirnir greiddu oftast atkvæði öðruvísi en flokksbræður
+      þeirra og -systur. Það fer eftir vinnulagi hvers flokks hvort það
+      telst vera gott eða slæmt.
+    </p>
+    <p class='skyring skyring_x13'>
+      Þetta eru þeir þingmenn sem hafa gefið kost á sér til endurkjörs og
+      eru meðal fimm efstu manna á lista í sínu kjördæmi.
+    </p>
+  </div>
+  <hr>
   <div id='thingmenn'>
 {% for ti in thingmenn %}
     <div class='thm thm_fl_{{ ti.flokksstafur }} {% if ti.thm.toppfimm %}thm_x13 {% endif %}{% if ti.skropari %}thm_skropari {% endif %}{% if ti.uppreisnarseggur %}thm_uppreisnarseggur {% endif %}{% if ti.velmenni %}thm_velmenni {% endif %}'
