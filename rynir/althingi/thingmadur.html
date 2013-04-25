@@ -20,7 +20,8 @@
   th, td {text-align: left; padding-right: 10px;}
   .kaus_uppreisn p {font-style: italic; font-size: 0.85em;
                     margin: -15px 25px 10px 25px;}
-  .kaus i {font-size: 0.85em; font-style: normal;}
+  .kaus i, .more {font-size: 0.85em; font-style: normal;}
+  .more {float: right;}
 {% endblock %}
 {% block title %}{{ thingmadur.nafn }}{% endblock %}
 {% block content %}
@@ -45,41 +46,67 @@
       <tr class='n'><th>Kaus nei:</th><td>{{ thingmadur.kaus_nei.count }}</td></tr>
       <tr class='s'><th>Sat hjá: </th><td>{{ thingmadur.kaus_ekki.count }}</td></tr>
     </table>{% if not thingmadur.flokkur.stafur == '_' %}
-    <div class='kaus kaus_uppreisn'>
+    {% if kaus_uppreisn|length > 0 %}
+    <div class='kaus kaus_uppreisn'><a name='uppreisn'></a>
       <h5>Uppreisnir</h2>
       <p>Það telst uppreisn ef þingmaur kýs gegn þorra flokksbræðra og -systra
          sinna, hvort eð er með skýru atkvæði eða með því að sitja hjá. Ef engin
          samstaða er, teljast allir vera í uppreisn.</p>
-      <ul>{% for a in thingmadur.kaus_uppreisn|slice:":10" %}
+      <ul>{% for a in kaus_uppreisn reversed %}
         <li><i>{{ a.kosning.timi|date:"Y-m-d" }}:</i>
-            <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill }}</a> <tt>({{ a.atkvaedi }})</tt></li>
+            <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill|truncatewords:"9" }}</a> <tt>({{ a.atkvaedi }})</tt></li>
       {% endfor %}</ul>
+      {% if kaus_uppreisn|length < thingmadur.kaus_uppreisn.count %}
+      <div class='more'><a href="/thingmenn/{{ thingmadur.althingi_id }}/upp={{ thingmadur.kaus_uppreisn.count }}/#uppreisn"
+        >meira ... ({{ thingmadur.kaus_uppreisn.count }})</a></div>
+      {% endif %}
     </div>{% endif %}
-    <div class='kaus kaus_ja'>
-      <h5>Kaus já <tt>(J)</tt></h2><ul>{% for a in thingmadur.kaus_ja|slice:":10" %}
+    {% endif %}
+    {% if kaus_ja|length > 0 %}
+    <div class='kaus kaus_ja'><a name='ja'></a>
+      <h5>Kaus já <tt>(J)</tt></h2><ul>{% for a in kaus_ja reversed %}
         <li><i>{{ a.kosning.timi|date:"Y-m-d" }}:</i>
-            <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill }}</a></li>
+            <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill|truncatewords:"9" }}</a></li>
       {% endfor %}</ul>
+      {% if kaus_ja|length < thingmadur.kaus_ja.count %}
+      <div class='more'><a href="/thingmenn/{{ thingmadur.althingi_id }}/ja={{ thingmadur.kaus_ja.count }}/#ja"
+        >meira ... ({{ thingmadur.kaus_ja.count }})</a></div>
+      {% endif %}
     </div>
-    <div class='kaus kaus_nei'>
-      <h5>Kaus nei <tt>(N)</tt></h2><ul>{% for a in thingmadur.kaus_nei|slice:":10" %}
+    {% endif %}
+    {% if kaus_nei|length > 0 %}
+    <div class='kaus kaus_nei'><a name='nei'></a>
+      <h5>Kaus nei <tt>(N)</tt></h2><ul>{% for a in kaus_nei reversed %}
         <li><i>{{ a.kosning.timi|date:"Y-m-d" }}:</i>
-            <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill }}</a></li>
+            <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill|truncatewords:"9" }}</a></li>
       {% endfor %}</ul>
+      {% if kaus_nei|length < thingmadur.kaus_nei.count %}
+      <div class='more'><a href="/thingmenn/{{ thingmadur.althingi_id }}/nei={{ thingmadur.kaus_nei.count }}/#nei"
+        >meira ... ({{ thingmadur.kaus_nei.count }})</a></div>
+      {% endif %}
     </div>
-    <div class='kaus kaus_ekki'>
-      <h5>Sat hjá <tt>(S)</tt></h2><ul>{% for a in thingmadur.kaus_ekki|slice:":10" %}
+    {% endif %}
+    {% if kaus_ekki|length > 0 %}
+    <div class='kaus kaus_ekki'><a name='ekki'></a>
+      <h5>Sat hjá <tt>(S)</tt></h2><ul>{% for a in kaus_ekki reversed %}
         <li><i>{{ a.kosning.timi|date:"Y-m-d" }}:</i>
-            <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill }}</a></li>
+            <a href='/kosningar/{{ a.kosning.uid }}/'>{{ a.kosning.umraeda.titill|truncatewords:"9" }}</a></li>
       {% endfor %}</ul>
+      {% if kaus_ekki|length < thingmadur.kaus_ekki.count %}
+      <div class='more'><a href="/thingmenn/{{ thingmadur.althingi_id }}/nei={{ thingmadur.kaus_ekki.count }}/#ekki"
+        >meira ... ({{ thingmadur.kaus_ekki.count }})</a></div>
+      {% endif %}
     </div>
+    {% endif %}
   </div>
 {% else %}
   <h2>Enginn þingmaður fannst... úbs!</h2>
 {% endif %}
   <script language='javascript'>
     $('.sel').click(function() {
-      setTimeout("updateSelection();", 25); return true;
+      setTimeout("updateSelection();", 250);
+      setTimeout("updateSelection();", 25);
+      return true;
     });
     updateSelection();
   </script>

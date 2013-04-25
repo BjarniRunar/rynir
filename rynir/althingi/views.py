@@ -24,16 +24,39 @@ def index(request):
   return HttpResponse(t.render(c))
 
 @cache_control(must_revalidate=False, max_age=24*3600)
-def thingmadur(request, althingi_id=None):
+def thingmadur(request,
+               althingi_id=None, uppreisn=None, ja=None, nei=None, ekki=None):
   try:
     thingmadur = Thingmadur.objects.filter(althingi_id=althingi_id)[0]
   except IndexError:
     thingmadur = None
 
+  kaus_ja = thingmadur.kaus_ja()
+  kaus_nei = thingmadur.kaus_nei()
+  kaus_ekki = thingmadur.kaus_ekki()
+  kaus_uppreisn = thingmadur.kaus_uppreisn()
+
+  if ja is None: ja = min(15, max(8, 0.2 * kaus_ja.count()))
+  if nei is None: nei = min(15, max(8, 0.2 * kaus_nei.count()))
+  if ekki is None: ekki = min(10, max(6, 0.2 * kaus_ekki.count()))
+  if uppreisn is None: uppreisn = min(30, max(15, 0.3 * kaus_uppreisn.count()))
+
+  kaus_ja = list(kaus_ja[:int(ja)])
+  kaus_nei = list(kaus_nei[:int(nei)])
+  kaus_ekki = list(kaus_ekki[:int(ekki)])
+  kaus_uppreisn = list(kaus_uppreisn[:int(uppreisn)])
+
+  for l in (kaus_uppreisn, kaus_ja, kaus_nei, kaus_ekki):
+    l.sort(key=lambda i: i.kosning.timi)
+
   t = loader.get_template('althingi/thingmadur.html')
   return HttpResponse(t.render(Context({
     'base': settings.TEMPLATE_BASE,
-    'thingmadur': thingmadur
+    'thingmadur': thingmadur,
+    'kaus_uppreisn': kaus_uppreisn,
+    'kaus_ja': kaus_ja,
+    'kaus_nei': kaus_nei,
+    'kaus_ekki': kaus_ekki,
   })))
 
 @cache_control(must_revalidate=False, max_age=24*3600)

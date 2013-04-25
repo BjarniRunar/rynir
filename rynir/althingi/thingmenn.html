@@ -61,7 +61,8 @@
   .thm_fl_O {background: #eef;}
   .thm p {padding: 0;}
   .thm img {height: 100%; max-width: 25%; float: left; margin: 0 4px 0 0;}
-  .thm .flokkur, .thm .x13 {font-size: 0.85em; font-weight: bold; float: right; margin: 0 0 4px 4px;}
+  .thm .flokkur, .thm .x13 {font-size: 0.85em; font-weight: bold;
+                            float: right; margin: 0 0 4px 4px;}
   .thm .flokkur:before {content: "(";}
   .thm .flokkur:after {content: ")";}
   .thm .nafn {font-size: 1.25em;}
@@ -71,7 +72,8 @@
   .thm li {margin: -2px 5px; padding: 0px;}
   .thm li.h:before {content: 'Hlýðni: ';}
   .thm li.m:before {content: 'Mæting: ';}
-  #flokkar {text-align: center;}
+  #flokkar {text-align: center; font-size: 1.25em;}
+  #flokkar .thingflokkar {font-size: 0.9em;}
   .fl {font-size: 0.8em; padding: 0 0.5em; margin: 2px 0; display: inline-block;}
 {% endblock %}
 {% block title %}Þingmenn og varaþingmenn{% endblock %}
@@ -89,8 +91,9 @@
    ><a class='sel fl' href='#thm_oópqrOÓPQR'>O Ó P R</a
    ><a class='sel fl' href='#thm_stuúvwSTUÚVW'>S T U Ú V</a
    ><a class='sel fl' href='#thm_xyýzþæöXYÝZÞÆÖ'>Y Ý Ö Æ Þ</a
-   ><br>{% for fl in flokkar %}
+   ><br><span class='thingflokkar'>{% for fl in flokkar %}
    <a class='sel fl' href='#thmfl_{{ fl.stafur }}'>{{ fl.nafn }}</a>{% endfor %}
+   </span>
   </div><hr>
   <div id='thingmenn'>
 {% for ti in thingmenn %}
