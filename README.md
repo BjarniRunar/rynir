@@ -19,12 +19,12 @@ Svo þarf að gera svona:
     $ manage.py runserver
 
     # Í öðrum terminal
-    $ curl http://localhost:8000/scraper/bootstrap/testing
+    $ curl http://localhost:8000/scrape/bootstrap/testing
 
 Ef þú vilt að græjan lesi allt sem gerðist á síðasta kjörtímabili, í
 staðinn fyrir að lesa bara inn síðustu fundina skiparðu svona í staðinn:
 
-    $ curl http://localhost:8000/scraper/bootstrap
+    $ curl http://localhost:8000/scrape/bootstrap
 
 Vei!
 
