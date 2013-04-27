@@ -90,7 +90,7 @@ class BootStrapper(threading.Thread):
 
     # FIXME: This is hard-coding the values for the 138-141st term.
     if self.testing:
-      for i in range(105, 115):
+      for i in range(112, 115):
         mp.scrape_and_parse(('http://www.althingi.is/altext/%d/f%3.3d.sgml'
                              ) % (141, i))
     else:

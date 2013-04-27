@@ -4,9 +4,11 @@ from metaparser import RegisterScraperParser
 from althingi.models import *
 from fundur import url_to_lth_fnr
 
+import settings
 
-SATUHJA_RE = re.compile('\(([^\)]+)\) greiddu ekki')
-FJARSTADDIR_RE = re.compile('\(([^\)]+)\) fjarstaddir')
+
+SATUHJA_RE = re.compile('\(([^\)]+)\) grei\S+ ekki')
+FJARSTADDIR_RE = re.compile('\(([^\)]+)\) fjarst')
 UMRAEDA_ID_RE = re.compile('/altext/(\d+/\d+/l\d+)\.sgml')
 DAGSTIMI_RE = re.compile('(\d\d\d\d-\d\d-\d\d? \d\d:\d\d):')
 
@@ -73,6 +75,14 @@ class ScraperParserFundarmal(ScraperParserHTML):
         if updating:
           for u in updating:
             u.delete()
+
+        if False and settings.DEBUG:
+          print '%s' % soup.h2.string
+          print 'j: %s'% ', '.join(ja)
+          print 'n: %s'% ', '.join(nei)
+          print 's: %s'% ', '.join(sh)
+          print 'f: %s'% ', '.join(fj)
+          print
 
         nu = Umraeda(uid=uid,
                      fundur=Fundur.objects.filter(fnr=fnr, lth=lth)[0],
